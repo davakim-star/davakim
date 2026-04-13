@@ -152,9 +152,9 @@ function markOneRead(el) {
 }
 
 /* ── Sign Out ───────────────────────────────────────────────── */
-function signOut() {
-  if (confirm('Sign out of EduTrack?')) {
-    toast('Signing out…', 'info', 1100);
+function logOut() {
+  if (confirm('Are you sure you want to log out?')) {
+    toast('Logging out…', 'info', 1100);
     setTimeout(() => location.href = 'index.html', 1000);
   }
 }

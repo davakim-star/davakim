@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reports — Admin Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">A</div>
+      <div class="logo-text">
+        <h2>AdminPortal</h2>
+        <p>Academic System</p>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <p class="sidebar-label">Main</p>
+      <div class="nav-item active" data-page="adminreports.html">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        </span>
+        Reports
+      </div>
+      <div class="nav-item" data-page="adminannouncements.html">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </span>
+        Announcements
+        <span class="nav-badge">3</span>
+      </div>
+      <div class="nav-item" data-page="adminprofile.html">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </span>
+        Profile
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <p class="sidebar-label">Academic</p>
+      <div class="nav-item" onclick="showToast('Grades module coming soon','info')">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </span>
+        Grades
+      </div>
+      <div class="nav-item" onclick="showToast('Attendance module coming soon','info')">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </span>
+        Attendance
+      </div>
+      <div class="nav-item" onclick="showToast('Subjects module coming soon','info')">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </span>
+        Subjects
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <p class="sidebar-label">System</p>
+      <div class="nav-item" onclick="showToast('Settings module coming soon','info')">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </span>
+        Settings
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user" onclick="window.location.href='adminprofile.html'">
+        <div class="user-avatar">M</div>
+        <div class="user-info">
+          <div class="name">Mrs. M.J. Laudato</div>
+          <div class="role">Administrator</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- MAIN -->
+  <div class="main-content">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="hamburger" id="hamburger">
+          <span></span><span></span><span></span>
+        </div>
+        <div>
+          <div class="page-title">Reports & Analytics</div>
+          <div class="page-subtitle">Academic Year 2024–2025</div>
+        </div>
+        <div class="topbar-search">
+          <svg class="search-icon" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="report-search" placeholder="Search records…" />
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="dropdown">
+          <button class="topbar-btn" id="btn-bell" onclick="toggleDropdown('notification-dropdown')">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <span class="badge"></span>
+          </button>
+          <div class="dropdown-menu" id="notification-dropdown">
+            <div style="padding:12px 14px;font-weight:700;font-size:13px;border-bottom:1px solid var(--border)">Notifications</div>
+            <div class="dropdown-item"><span>📋</span> Q3 grades have been submitted</div>
+            <div class="dropdown-item"><span>📢</span> New announcement posted</div>
+            <div class="dropdown-item"><span>👤</span> Student profile updated</div>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item" style="justify-content:center;color:var(--accent);font-weight:600">View all</div>
+          </div>
+        </div>
+        <div class="dropdown">
+          <div class="topbar-avatar" onclick="toggleDropdown('user-dropdown')">M</div>
+          <div class="dropdown-menu" id="user-dropdown">
+            <div class="dropdown-item" onclick="window.location.href='adminprofile.html'"><span>👤</span> My Profile</div>
+            <div class="dropdown-item" onclick="showToast('Settings coming soon','info')"><span>⚙️</span> Settings</div>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item danger" onclick="confirmAction('Sign out?', ()=>showToast('Signed out','info'))"><span>🚪</span> Sign Out</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- PAGE CONTENT -->
+    <main class="page-content">
+
+      <!-- HEADER -->
+      <div class="page-header">
+        <div>
+          <h1>Student Academic Report</h1>
+          <p>Kim Shanelle Dava — 3rd Year | Adviser: Mrs. Maydelyn Joy Laudato</p>
+        </div>
+        <div class="flex gap-2">
+          <button class="btn btn-secondary" onclick="exportTableCSV('grades-table','grades_report.csv')">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Export CSV
+          </button>
+          <button class="btn btn-primary" onclick="openModal('modal-add-report')">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add Report
+          </button>
+        </div>
+      </div>
+
+      <!-- STAT CARDS -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon teal">🎓</div>
+          <div class="stat-info">
+            <div class="label">GWA</div>
+            <div class="value">1.50</div>
+            <div class="change up">▲ Latin Honors</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green">📅</div>
+          <div class="stat-info">
+            <div class="label">Attendance</div>
+            <div class="value">95%</div>
+            <div class="change up">▲ 2% this month</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon blue">📚</div>
+          <div class="stat-info">
+            <div class="label">Subjects</div>
+            <div class="value">3</div>
+            <div class="change">Enrolled Subjects</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon amber">🏆</div>
+          <div class="stat-info">
+            <div class="label">Standing</div>
+            <div class="value">Dean's</div>
+            <div class="change up">▲ Honor Student</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TABS -->
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="grades">📊 Grades</button>
+        <button class="tab-btn" data-tab="attendance">📅 Attendance</button>
+        <button class="tab-btn" data-tab="charts">📈 Charts</button>
+        <button class="tab-btn" data-tab="conduct">📋 Conduct</button>
+      </div>
+
+      <!-- TAB: GRADES -->
+      <div class="tab-panel active" data-tab="grades">
+        <div class="card mb-6">
+          <div class="card-header">
+            <div>
+              <h3>Grade Summary</h3>
+              <p>Per subject breakdown — SY 2024–2025</p>
+            </div>
+            <div class="flex gap-2">
+              <button class="btn btn-sm btn-secondary" onclick="openModal('modal-edit-grade')">Edit Grades</button>
+              <button class="btn btn-sm btn-primary" onclick="exportTableCSV('grades-table','grades_report.csv')">Export</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table id="grades-table">
+              <thead>
+                <tr>
+                  <th>Subject Code</th>
+                  <th>Subject Name</th>
+                  <th>Units</th>
+                  <th>Prelim</th>
+                  <th>Midterm</th>
+                  <th>Pre-Finals</th>
+                  <th>Finals</th>
+                  <th>Final Grade</th>
+                  <th>Remarks</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="grades-tbody">
+                <tr>
+                  <td><span class="chip">SIA 102</span></td>
+                  <td>Systems Integration & Architecture</td>
+                  <td>3</td>
+                  <td>92</td>
+                  <td>90</td>
+                  <td>94</td>
+                  <td>93</td>
+                  <td><strong>1.25</strong></td>
+                  <td><span class="badge badge-success">Passed</span></td>
+                  <td>
+                    <div class="flex gap-2">
+                      <button class="btn btn-ghost btn-icon" title="Edit" onclick="openModal('modal-edit-grade')">✏️</button>
+                      <button class="btn btn-ghost btn-icon" title="Delete" onclick="confirmAction('Delete this grade?', ()=>{this.closest('tr').remove();showToast('Grade record deleted','danger')})">🗑️</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="chip">WS 101</span></td>
+                  <td>Web Systems & Technologies</td>
+                  <td>3</td>
+                  <td>85</td>
+                  <td>88</td>
+                  <td>87</td>
+                  <td>90</td>
+                  <td><strong>1.50</strong></td>
+                  <td><span class="badge badge-success">Passed</span></td>
+                  <td>
+                    <div class="flex gap-2">
+                      <button class="btn btn-ghost btn-icon" title="Edit" onclick="openModal('modal-edit-grade')">✏️</button>
+                      <button class="btn btn-ghost btn-icon" title="Delete" onclick="confirmAction('Delete this grade?', ()=>{this.closest('tr').remove();showToast('Grade record deleted','danger')})">🗑️</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="chip">CC 106</span></td>
+                  <td>Computer Concepts & Applications</td>
+                  <td>3</td>
+                  <td>96</td>
+                  <td>95</td>
+                  <td>97</td>
+                  <td>98</td>
+                  <td><strong>1.00</strong></td>
+                  <td><span class="badge badge-success">Passed</span></td>
+                  <td>
+                    <div class="flex gap-2">
+                      <button class="btn btn-ghost btn-icon" title="Edit" onclick="openModal('modal-edit-grade')">✏️</button>
+                      <button class="btn btn-ghost btn-icon" title="Delete" onclick="confirmAction('Delete this grade?', ()=>{this.closest('tr').remove();showToast('Grade record deleted','danger')})">🗑️</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="padding:14px 20px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+            <span class="text-muted text-sm">3 records</span>
+            <div class="flex gap-2">
+              <button class="btn btn-ghost btn-sm" disabled>← Prev</button>
+              <button class="btn btn-ghost btn-sm" style="background:var(--accent-light);color:var(--accent-dark)">1</button>
+              <button class="btn btn-ghost btn-sm" disabled>Next →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- GWA Summary -->
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header"><h3>GWA Computation</h3></div>
+            <div class="card-body">
+              <table>
+                <thead><tr><th>Subject</th><th>Units</th><th>Grade</th><th>QP</th></tr></thead>
+                <tbody>
+                  <tr><td>SIA 102</td><td>3</td><td>1.25</td><td>3.75</td></tr>
+                  <tr><td>WS 101</td><td>3</td><td>1.50</td><td>4.50</td></tr>
+                  <tr><td>CC 106</td><td>3</td><td>1.00</td><td>3.00</td></tr>
+                  <tr style="font-weight:700;background:var(--accent-light)">
+                    <td>Total</td><td>9</td><td colspan="2">GWA: <strong>1.25</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="mt-4" style="background:var(--success-light);border-radius:8px;padding:12px 16px;">
+                <p style="color:var(--success);font-weight:700;font-size:14px">🏆 Dean's Lister — With Highest Honors</p>
+                <p class="text-sm text-muted">GWA of 1.25 qualifies for highest academic honors</p>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><h3>Academic Standing</h3></div>
+            <div class="card-body">
+              <div style="margin-bottom:16px">
+                <div class="flex-between mb-4">
+                  <span class="text-sm fw-600">SIA 102</span>
+                  <span class="text-sm text-muted">1.25</span>
+                </div>
+                <div class="progress"><div class="progress-bar" style="width:92%"></div></div>
+              </div>
+              <div style="margin-bottom:16px">
+                <div class="flex-between mb-4">
+                  <span class="text-sm fw-600">WS 101</span>
+                  <span class="text-sm text-muted">1.50</span>
+                </div>
+                <div class="progress"><div class="progress-bar" style="width:87%;background:var(--info)"></div></div>
+              </div>
+              <div style="margin-bottom:16px">
+                <div class="flex-between mb-4">
+                  <span class="text-sm fw-600">CC 106</span>
+                  <span class="text-sm text-muted">1.00</span>
+                </div>
+                <div class="progress"><div class="progress-bar" style="width:97%;background:var(--warning)"></div></div>
+              </div>
+              <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px" onclick="openModal('modal-add-report')">
+                + Add Subject Record
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: ATTENDANCE -->
+      <div class="tab-panel" data-tab="attendance">
+        <div class="card mb-6">
+          <div class="card-header">
+            <div><h3>Attendance Records</h3><p>Monthly breakdown per subject</p></div>
+            <div class="flex gap-2">
+              <select class="form-control" style="width:auto;padding:7px 12px" onchange="showToast('Filtered: '+this.value,'info')">
+                <option>All Subjects</option>
+                <option>SIA 102</option>
+                <option>WS 101</option>
+                <option>CC 106</option>
+              </select>
+              <button class="btn btn-sm btn-primary" onclick="openModal('modal-mark-attendance')">Mark Attendance</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Date</th><th>Subject</th><th>Status</th><th>Time In</th><th>Remarks</th><th>Action</th></tr>
+              </thead>
+              <tbody id="attendance-tbody">
+                <tr><td>Apr 10, 2025</td><td><span class="chip">SIA 102</span></td><td><span class="badge badge-success">Present</span></td><td>7:30 AM</td><td>On time</td><td><button class="btn btn-ghost btn-icon" onclick="showToast('Record updated','success')">✏️</button></td></tr>
+                <tr><td>Apr 10, 2025</td><td><span class="chip">WS 101</span></td><td><span class="badge badge-success">Present</span></td><td>9:00 AM</td><td>On time</td><td><button class="btn btn-ghost btn-icon" onclick="showToast('Record updated','success')">✏️</button></td></tr>
+                <tr><td>Apr 10, 2025</td><td><span class="chip">CC 106</span></td><td><span class="badge badge-success">Present</span></td><td>1:00 PM</td><td>On time</td><td><button class="btn btn-ghost btn-icon" onclick="showToast('Record updated','success')">✏️</button></td></tr>
+                <tr><td>Apr 8, 2025</td><td><span class="chip">SIA 102</span></td><td><span class="badge badge-warning">Late</span></td><td>8:15 AM</td><td>15 mins late</td><td><button class="btn btn-ghost btn-icon" onclick="showToast('Record updated','success')">✏️</button></td></tr>
+                <tr><td>Apr 7, 2025</td><td><span class="chip">WS 101</span></td><td><span class="badge badge-danger">Absent</span></td><td>—</td><td>Medical reason</td><td><button class="btn btn-ghost btn-icon" onclick="showToast('Record updated','success')">✏️</button></td></tr>
+                <tr><td>Apr 7, 2025</td><td><span class="chip">CC 106</span></td><td><span class="badge badge-success">Present</span></td><td>1:00 PM</td><td>On time</td><td><button class="btn btn-ghost btn-icon" onclick="showToast('Record updated','success')">✏️</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="grid-3">
+          <div class="stat-card">
+            <div class="stat-icon green">✅</div>
+            <div class="stat-info">
+              <div class="label">Present Days</div>
+              <div class="value">47</div>
+              <div class="change up">▲ 95%</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon amber">⚠️</div>
+            <div class="stat-info">
+              <div class="label">Late</div>
+              <div class="value">2</div>
+              <div class="change">Times this sem</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon red">❌</div>
+            <div class="stat-info">
+              <div class="label">Absent Days</div>
+              <div class="value">1</div>
+              <div class="change">Excused absence</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: CHARTS -->
+      <div class="tab-panel" data-tab="charts">
+        <div class="grid-2 mb-6">
+          <div class="card">
+            <div class="card-header"><h3>Attendance per Subject (%)</h3></div>
+            <div class="card-body">
+              <canvas id="chart-attendance" width="400" height="240" style="max-width:100%"></canvas>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><h3>Grade Trend per Quarter</h3></div>
+            <div class="card-body">
+              <canvas id="chart-grades" width="400" height="240" style="max-width:100%"></canvas>
+              <div class="flex gap-3 mt-4" style="flex-wrap:wrap">
+                <div class="flex gap-2" style="align-items:center"><span style="width:12px;height:3px;background:#00b4a0;display:inline-block;border-radius:2px"></span><span class="text-sm text-muted">SIA 102</span></div>
+                <div class="flex gap-2" style="align-items:center"><span style="width:12px;height:3px;background:#1a3c5e;display:inline-block;border-radius:2px"></span><span class="text-sm text-muted">WS 101</span></div>
+                <div class="flex gap-2" style="align-items:center"><span style="width:12px;height:3px;background:#d69e2e;display:inline-block;border-radius:2px"></span><span class="text-sm text-muted">CC 106</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: CONDUCT -->
+      <div class="tab-panel" data-tab="conduct">
+        <div class="card mb-6">
+          <div class="card-header">
+            <div><h3>Conduct & Behavior Records</h3></div>
+            <button class="btn btn-sm btn-primary" onclick="openModal('modal-add-conduct')">+ Add Record</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Date</th><th>Category</th><th>Description</th><th>Handled By</th><th>Status</th><th>Action</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>Mar 15, 2025</td>
+                  <td><span class="badge badge-primary">Achievement</span></td>
+                  <td>1st Place — IT Quiz Bee</td>
+                  <td>Mrs. Laudato</td>
+                  <td><span class="badge badge-success">Resolved</span></td>
+                  <td><button class="btn btn-ghost btn-icon" onclick="showToast('Record viewed','info')">👁️</button></td>
+                </tr>
+                <tr>
+                  <td>Feb 20, 2025</td>
+                  <td><span class="badge badge-success">Commendation</span></td>
+                  <td>Outstanding class participation in CC 106</td>
+                  <td>Mrs. Laudato</td>
+                  <td><span class="badge badge-success">Noted</span></td>
+                  <td><button class="btn btn-ghost btn-icon" onclick="showToast('Record viewed','info')">👁️</button></td>
+                </tr>
+                <tr>
+                  <td>Jan 10, 2025</td>
+                  <td><span class="badge badge-warning">Concern</span></td>
+                  <td>Late submission — SIA 102 project</td>
+                  <td>Mrs. Laudato</td>
+                  <td><span class="badge badge-info">Monitored</span></td>
+                  <td><button class="btn btn-ghost btn-icon" onclick="showToast('Record viewed','info')">👁️</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-container"></div>
+
+<!-- MODAL: ADD REPORT -->
+<div class="modal-overlay" id="modal-add-report">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Add Grade Record</h3>
+      <button class="modal-close" onclick="closeModal('modal-add-report')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Subject Code</label>
+          <select class="form-control" id="new-subject">
+            <option>SIA 102</option><option>WS 101</option><option>CC 106</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Units</label>
+          <input type="number" class="form-control" value="3" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Prelim Grade</label>
+          <input type="number" class="form-control" id="new-prelim" placeholder="e.g. 90" min="0" max="100" />
+        </div>
+        <div class="form-group">
+          <label>Midterm Grade</label>
+          <input type="number" class="form-control" id="new-midterm" placeholder="e.g. 88" min="0" max="100" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Pre-Finals</label>
+          <input type="number" class="form-control" id="new-prefinal" placeholder="e.g. 92" min="0" max="100" />
+        </div>
+        <div class="form-group">
+          <label>Finals</label>
+          <input type="number" class="form-control" id="new-final" placeholder="e.g. 94" min="0" max="100" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Remarks</label>
+        <textarea class="form-control" rows="2" placeholder="Additional notes..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-add-report')">Cancel</button>
+      <button class="btn btn-primary" onclick="addGradeRecord()">Save Record</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: EDIT GRADE -->
+<div class="modal-overlay" id="modal-edit-grade">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Edit Grade Record</h3>
+      <button class="modal-close" onclick="closeModal('modal-edit-grade')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Prelim</label><input type="number" class="form-control" value="92" />
+        </div>
+        <div class="form-group">
+          <label>Midterm</label><input type="number" class="form-control" value="90" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Pre-Finals</label><input type="number" class="form-control" value="94" />
+        </div>
+        <div class="form-group">
+          <label>Finals</label><input type="number" class="form-control" value="93" />
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-edit-grade')">Cancel</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-edit-grade');showToast('Grade updated successfully','success')">Update</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: MARK ATTENDANCE -->
+<div class="modal-overlay" id="modal-mark-attendance">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Mark Attendance</h3>
+      <button class="modal-close" onclick="closeModal('modal-mark-attendance')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" class="form-control" id="att-date" />
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <select class="form-control" id="att-subject">
+            <option>SIA 102</option><option>WS 101</option><option>CC 106</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Status</label>
+          <select class="form-control" id="att-status">
+            <option>Present</option><option>Absent</option><option>Late</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Time In</label>
+          <input type="time" class="form-control" id="att-time" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Remarks</label>
+        <input type="text" class="form-control" id="att-remarks" placeholder="e.g. On time, Medical excuse..." />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-mark-attendance')">Cancel</button>
+      <button class="btn btn-primary" onclick="addAttendanceRecord()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: ADD CONDUCT -->
+<div class="modal-overlay" id="modal-add-conduct">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Add Conduct Record</h3>
+      <button class="modal-close" onclick="closeModal('modal-add-conduct')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select class="form-control">
+            <option>Achievement</option><option>Commendation</option><option>Concern</option><option>Violation</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea class="form-control" rows="3" placeholder="Describe the conduct/behavior..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-add-conduct')">Cancel</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-add-conduct');showToast('Conduct record added','success')">Save</button>
+    </div>
+  </div>
+</div>
+
+<script src="apps.js"></script>
+<script>
+  // Override hamburger
+  document.querySelector('.hamburger').onclick = openSidebar;
+  document.querySelector('.sidebar-overlay').onclick = closeSidebar;
+
+  // Set today's date
+  const today = new Date().toISOString().split('T')[0];
+  const attDate = document.getElementById('att-date');
+  if(attDate) attDate.value = today;
+
+  // Init charts on tab switch
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if(btn.getAttribute('data-tab') === 'charts') {
+        setTimeout(() => window.initCharts(), 50);
+      }
+    });
+  });
+
+  // Table search
+  initTableSearch('report-search', 'grades-table');
+
+  // Add grade record
+  function addGradeRecord() {
+    const subj = document.getElementById('new-subject').value;
+    const p = parseInt(document.getElementById('new-prelim').value) || 0;
+    const m = parseInt(document.getElementById('new-midterm').value) || 0;
+    const pf = parseInt(document.getElementById('new-prefinal').value) || 0;
+    const f = parseInt(document.getElementById('new-final').value) || 0;
+    const avg = ((p + m + pf + f) / 4).toFixed(0);
+    const gpa = avg >= 97 ? '1.00' : avg >= 93 ? '1.25' : avg >= 89 ? '1.50' : avg >= 85 ? '1.75' : avg >= 81 ? '2.00' : '2.25';
+    const tbody = document.getElementById('grades-tbody');
+    const row = `<tr>
+      <td><span class="chip">${subj}</span></td>
+      <td>New Subject</td><td>3</td>
+      <td>${p}</td><td>${m}</td><td>${pf}</td><td>${f}</td>
+      <td><strong>${gpa}</strong></td>
+      <td><span class="badge badge-success">Passed</span></td>
+      <td><div class="flex gap-2">
+        <button class="btn btn-ghost btn-icon" onclick="showToast('Edit clicked','info')">✏️</button>
+        <button class="btn btn-ghost btn-icon" onclick="confirmAction('Delete?',()=>{this.closest('tr').remove();showToast('Deleted','danger')})">🗑️</button>
+      </div></td>
+    </tr>`;
+    tbody.insertAdjacentHTML('beforeend', row);
+    closeModal('modal-add-report');
+    showToast('Grade record added successfully', 'success');
+  }
+
+  // Add attendance record
+  function addAttendanceRecord() {
+    const date = document.getElementById('att-date').value;
+    const subj = document.getElementById('att-subject').value;
+    const status = document.getElementById('att-status').value;
+    const time = document.getElementById('att-time').value;
+    const remarks = document.getElementById('att-remarks').value;
+    const badgeClass = status==='Present'?'success':status==='Absent'?'danger':'warning';
+    const tbody = document.getElementById('attendance-tbody');
+    tbody.insertAdjacentHTML('afterbegin', `<tr>
+      <td>${date}</td>
+      <td><span class="chip">${subj}</span></td>
+      <td><span class="badge badge-${badgeClass}">${status}</span></td>
+      <td>${time || '—'}</td>
+      <td>${remarks || '—'}</td>
+      <td><button class="btn btn-ghost btn-icon" onclick="showToast('Updated','success')">✏️</button></td>
+    </tr>`);
+    closeModal('modal-mark-attendance');
+    showToast('Attendance recorded', 'success');
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Announcements — Admin Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">A</div>
+      <div class="logo-text">
+        <h2>AdminPortal</h2>
+        <p>Academic System</p>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <p class="sidebar-label">Main</p>
+      <div class="nav-item" data-page="adminreports.html">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        </span>
+        Reports
+      </div>
+      <div class="nav-item active" data-page="adminannouncements.html">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </span>
+        Announcements
+        <span class="nav-badge" id="ann-badge">3</span>
+      </div>
+      <div class="nav-item" data-page="adminprofile.html">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </span>
+        Profile
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <p class="sidebar-label">Academic</p>
+      <div class="nav-item" onclick="showToast('Grades module coming soon','info')">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </span>
+        Grades
+      </div>
+      <div class="nav-item" onclick="showToast('Attendance module coming soon','info')">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </span>
+        Attendance
+      </div>
+      <div class="nav-item" onclick="showToast('Subjects module coming soon','info')">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </span>
+        Subjects
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <p class="sidebar-label">System</p>
+      <div class="nav-item" onclick="showToast('Settings coming soon','info')">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </span>
+        Settings
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user" onclick="window.location.href='adminprofile.html'">
+        <div class="user-avatar">M</div>
+        <div class="user-info">
+          <div class="name">Mrs. M.J. Laudato</div>
+          <div class="role">Administrator</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- MAIN -->
+  <div class="main-content">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+        <div>
+          <div class="page-title">Announcements</div>
+          <div class="page-subtitle">Manage school communications</div>
+        </div>
+        <div class="topbar-search">
+          <svg class="search-icon" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="ann-search" placeholder="Search announcements…" />
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="dropdown">
+          <button class="topbar-btn" id="btn-bell" onclick="toggleDropdown('notification-dropdown')">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <span class="badge"></span>
+          </button>
+          <div class="dropdown-menu" id="notification-dropdown">
+            <div style="padding:12px 14px;font-weight:700;font-size:13px;border-bottom:1px solid var(--border)">Notifications</div>
+            <div class="dropdown-item"><span>📢</span> 3 new announcements</div>
+            <div class="dropdown-item"><span>📋</span> Report submitted</div>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item" style="justify-content:center;color:var(--accent);font-weight:600">View all</div>
+          </div>
+        </div>
+        <div class="dropdown">
+          <div class="topbar-avatar" onclick="toggleDropdown('user-dropdown')">M</div>
+          <div class="dropdown-menu" id="user-dropdown">
+            <div class="dropdown-item" onclick="window.location.href='adminprofile.html'"><span>👤</span> My Profile</div>
+            <div class="dropdown-item" onclick="showToast('Settings coming soon','info')"><span>⚙️</span> Settings</div>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item danger" onclick="confirmAction('Sign out?', ()=>showToast('Signed out','info'))"><span>🚪</span> Sign Out</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- PAGE CONTENT -->
+    <main class="page-content">
+
+      <!-- HEADER -->
+      <div class="page-header">
+        <div>
+          <h1>Announcements Board</h1>
+          <p>Post and manage communications for students, parents, and staff</p>
+        </div>
+        <div class="flex gap-2">
+          <div class="dropdown">
+            <button class="btn btn-secondary" onclick="toggleDropdown('filter-dropdown')">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+              Filter
+            </button>
+            <div class="dropdown-menu" id="filter-dropdown">
+              <div class="dropdown-item" onclick="filterAnnouncements('all')">All</div>
+              <div class="dropdown-item" onclick="filterAnnouncements('high')">🔴 Urgent</div>
+              <div class="dropdown-item" onclick="filterAnnouncements('medium')">🟡 General</div>
+              <div class="dropdown-item" onclick="filterAnnouncements('low')">🔵 Info</div>
+              <div class="dropdown-item" onclick="filterAnnouncements('event')">🟢 Event</div>
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="openModal('modal-new-ann')">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            New Announcement
+          </button>
+        </div>
+      </div>
+
+      <!-- STATS -->
+      <div class="stats-grid" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">
+        <div class="stat-card">
+          <div class="stat-icon teal">📢</div>
+          <div class="stat-info">
+            <div class="label">Total</div>
+            <div class="value" id="total-count">6</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon red">🚨</div>
+          <div class="stat-info">
+            <div class="label">Urgent</div>
+            <div class="value" id="urgent-count">1</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green">🎉</div>
+          <div class="stat-info">
+            <div class="label">Events</div>
+            <div class="value" id="event-count">2</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon blue">📋</div>
+          <div class="stat-info">
+            <div class="label">General</div>
+            <div class="value" id="general-count">3</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LAYOUT: SPLIT -->
+      <div class="grid-2" style="align-items:start">
+
+        <!-- LEFT: ANNOUNCEMENTS LIST -->
+        <div>
+          <div class="flex-between mb-4">
+            <h3 style="font-size:15px;font-weight:700">All Announcements</h3>
+            <div class="flex gap-2">
+              <button class="btn btn-ghost btn-sm" id="view-list" onclick="setView('list')" style="background:var(--accent-light);color:var(--accent-dark)">List</button>
+              <button class="btn btn-ghost btn-sm" id="view-grid" onclick="setView('grid')">Grid</button>
+            </div>
+          </div>
+          <div id="announcements-container">
+            <!-- Items rendered by JS -->
+          </div>
+        </div>
+
+        <!-- RIGHT: DETAIL / COMPOSE PANEL -->
+        <div>
+          <div class="card" id="detail-panel">
+            <div class="card-header">
+              <div>
+                <h3 id="detail-title">Select an Announcement</h3>
+                <p id="detail-meta" class="text-muted text-sm">Click any item to view details</p>
+              </div>
+              <div class="flex gap-2" id="detail-actions" style="display:none!important"></div>
+            </div>
+            <div class="card-body">
+              <div id="detail-content" style="color:var(--text-muted);font-size:13.5px;line-height:1.7">
+                <div style="text-align:center;padding:40px 20px">
+                  <div style="font-size:48px;margin-bottom:12px">📢</div>
+                  <p style="color:var(--text-muted)">Select an announcement from the list to view its full content here.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RECIPIENTS CARD -->
+          <div class="card mt-4">
+            <div class="card-header"><h3>Send to Recipients</h3></div>
+            <div class="card-body">
+              <p class="text-sm text-muted mb-4">Notifications will be sent to selected groups.</p>
+              <div style="display:flex;flex-direction:column;gap:10px">
+                <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13.5px">
+                  <input type="checkbox" id="recv-student" checked style="width:16px;height:16px;accent-color:var(--accent)">
+                  <span>👩‍🎓 Kim Shanelle Dava (Student)</span>
+                </label>
+                <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13.5px">
+                  <input type="checkbox" id="recv-parent" checked style="width:16px;height:16px;accent-color:var(--accent)">
+                  <span>👨‍👩‍👧 Ritchell Dava (Parent)</span>
+                </label>
+                <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13.5px">
+                  <input type="checkbox" id="recv-teacher" style="width:16px;height:16px;accent-color:var(--accent)">
+                  <span>👩‍🏫 Mrs. Maydelyn Joy Laudato (Teacher)</span>
+                </label>
+                <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13.5px">
+                  <input type="checkbox" id="recv-all" style="width:16px;height:16px;accent-color:var(--accent)">
+                  <span>🏫 All Users</span>
+                </label>
+              </div>
+              <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:16px" onclick="sendNotification()">
+                📤 Send Notification
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<div class="toast-container"></div>
+
+<!-- MODAL: NEW ANNOUNCEMENT -->
+<div class="modal-overlay" id="modal-new-ann">
+  <div class="modal" style="max-width:600px">
+    <div class="modal-header">
+      <h3>New Announcement</h3>
+      <button class="modal-close" onclick="closeModal('modal-new-ann')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" class="form-control" id="new-ann-title" placeholder="Announcement title…" />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Category</label>
+          <select class="form-control" id="new-ann-cat">
+            <option value="medium">General</option>
+            <option value="high">Urgent</option>
+            <option value="low">Info</option>
+            <option value="event">Event</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Posted By</label>
+          <input type="text" class="form-control" value="Mrs. Maydelyn Joy Laudato" readonly style="background:var(--bg)" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea class="form-control" id="new-ann-body" rows="5" placeholder="Write the announcement content here…"></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Start Date</label>
+          <input type="date" class="form-control" id="new-ann-start" />
+        </div>
+        <div class="form-group">
+          <label>End Date (optional)</label>
+          <input type="date" class="form-control" id="new-ann-end" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Attachment (optional)</label>
+        <input type="file" class="form-control" id="new-ann-file" accept=".pdf,.doc,.docx,.png,.jpg" />
+        <p class="form-hint">PDF, Word, or image files accepted</p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-new-ann')">Cancel</button>
+      <button class="btn btn-secondary" onclick="saveDraft()">Save Draft</button>
+      <button class="btn btn-primary" onclick="postAnnouncement()">Post Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: EDIT -->
+<div class="modal-overlay" id="modal-edit-ann">
+  <div class="modal" style="max-width:600px">
+    <div class="modal-header">
+      <h3>Edit Announcement</h3>
+      <button class="modal-close" onclick="closeModal('modal-edit-ann')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" class="form-control" id="edit-ann-title" />
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea class="form-control" id="edit-ann-body" rows="5"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Category</label>
+        <select class="form-control" id="edit-ann-cat">
+          <option value="medium">General</option>
+          <option value="high">Urgent</option>
+          <option value="low">Info</option>
+          <option value="event">Event</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-edit-ann')">Cancel</button>
+      <button class="btn btn-primary" onclick="updateAnnouncement()">Update</button>
+    </div>
+  </div>
+</div>
+
+<script src="apps.js"></script>
+<script>
+  document.querySelector('.hamburger').onclick = openSidebar;
+  document.querySelector('.sidebar-overlay').onclick = closeSidebar;
+
+  // ===== ANNOUNCEMENT DATA =====
+  let announcements = [
+    {
+      id: 1, priority: 'high', title: 'Semester Final Examinations',
+      body: 'Final examinations are scheduled from April 28 to May 2, 2025. All students must bring their examination permits. No permit, no exam policy will be strictly enforced. Please coordinate with your subject teachers for the specific schedules.',
+      author: 'Mrs. Maydelyn Joy Laudato', date: 'April 10, 2025', pinned: true,
+      recipients: ['Kim Shanelle Dava', 'Ritchell Dava']
+    },
+    {
+      id: 2, priority: 'event', title: 'IT Week Celebration 2025',
+      body: 'Join us for the annual IT Week Celebration from April 21–25, 2025! Activities include Quiz Bee, Coding Contest, and Culmination Night. All 3rd Year IT students are encouraged to join and represent their section.',
+      author: 'Admin Office', date: 'April 8, 2025', pinned: false,
+      recipients: ['Kim Shanelle Dava']
+    },
+    {
+      id: 3, priority: 'medium', title: 'Enrollment for 2nd Semester Open',
+      body: 'Online enrollment for the 2nd semester of AY 2025–2026 is now open. Students should log in to the student portal to select their subjects. Advising with your program adviser is required before enrollment.',
+      author: 'Registrar\'s Office', date: 'April 5, 2025', pinned: false,
+      recipients: ['Kim Shanelle Dava', 'Ritchell Dava']
+    },
+    {
+      id: 4, priority: 'low', title: 'Library Hours Extended',
+      body: 'The university library will extend its operating hours from 7:00 AM to 9:00 PM starting April 15 until the end of finals week. Students are encouraged to use this opportunity for their review and research.',
+      author: 'Library Services', date: 'April 3, 2025', pinned: false,
+      recipients: ['All Students']
+    },
+    {
+      id: 5, priority: 'event', title: 'Foundation Day Activities',
+      body: 'University Foundation Day will be held on April 18, 2025. Classes are suspended for the day. A program and cultural shows will be held at the main quadrangle. Attendance is encouraged.',
+      author: 'Student Affairs', date: 'April 1, 2025', pinned: false,
+      recipients: ['All Students', 'All Faculty']
+    },
+    {
+      id: 6, priority: 'medium', title: 'Grade Submission Deadline Reminder',
+      body: 'All faculty members are reminded that the deadline for grade submission is April 20, 2025. Please comply with this deadline to avoid delays in the issuance of grades to students.',
+      author: 'Academic Affairs', date: 'March 28, 2025', pinned: false,
+      recipients: ['Mrs. Maydelyn Joy Laudato']
+    },
+  ];
+
+  let selectedId = null;
+  let currentView = 'list';
+  let currentFilter = 'all';
+
+  const priorityConfig = {
+    high: { label: 'Urgent', class: 'urgent', badge: 'danger', icon: '🚨' },
+    medium: { label: 'General', class: 'warning', badge: 'warning', icon: '📋' },
+    low: { label: 'Info', class: 'info', badge: 'info', icon: 'ℹ️' },
+    event: { label: 'Event', class: 'success', badge: 'primary', icon: '🎉' }
+  };
+
+  function renderAnnouncements() {
+    const container = document.getElementById('announcements-container');
+    const searchQ = document.getElementById('ann-search')?.value.toLowerCase() || '';
+    const filtered = announcements.filter(a =>
+      (currentFilter === 'all' || a.priority === currentFilter) &&
+      (a.title.toLowerCase().includes(searchQ) || a.body.toLowerCase().includes(searchQ))
+    );
+
+    if (filtered.length === 0) {
+      container.innerHTML = `<div style="text-align:center;padding:40px;color:var(--text-muted)"><div style="font-size:40px;margin-bottom:10px">📭</div><p>No announcements found</p></div>`;
+      return;
+    }
+
+    container.innerHTML = filtered.map(a => {
+      const cfg = priorityConfig[a.priority];
+      const isSelected = a.id === selectedId;
+      return `<div class="ann-card ${cfg.class}" id="ann-${a.id}" onclick="selectAnnouncement(${a.id})"
+        style="cursor:pointer;${isSelected ? 'box-shadow:0 0 0 2px var(--accent);' : ''}">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+              ${a.pinned ? '<span title="Pinned">📌</span>' : ''}
+              <span class="badge badge-${cfg.badge}">${cfg.icon} ${cfg.label}</span>
+            </div>
+            <h4>${a.title}</h4>
+            <p style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${a.body}</p>
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+              <span class="text-sm text-muted">📅 ${a.date}</span>
+              <span class="text-sm text-muted">👤 ${a.author}</span>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px;flex-shrink:0" onclick="event.stopPropagation()">
+            <button class="btn btn-ghost btn-icon btn-sm" title="Edit" onclick="editAnnouncement(${a.id})">✏️</button>
+            <button class="btn btn-ghost btn-icon btn-sm" title="${a.pinned ? 'Unpin' : 'Pin'}" onclick="togglePin(${a.id})">${a.pinned ? '📌' : '📍'}</button>
+            <button class="btn btn-ghost btn-icon btn-sm" title="Delete" onclick="deleteAnnouncement(${a.id})">🗑️</button>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function selectAnnouncement(id) {
+    selectedId = id;
+    const a = announcements.find(x => x.id === id);
+    if (!a) return;
+    const cfg = priorityConfig[a.priority];
+
+    document.getElementById('detail-title').textContent = a.title;
+    document.getElementById('detail-meta').innerHTML = `<span class="badge badge-${cfg.badge}">${cfg.icon} ${cfg.label}</span> &nbsp; Posted by <strong>${a.author}</strong> on ${a.date}`;
+    document.getElementById('detail-content').innerHTML = `
+      <p style="line-height:1.8;font-size:14px;color:var(--text)">${a.body}</p>
+      <div style="margin-top:16px;padding:12px 16px;background:var(--bg);border-radius:8px">
+        <p class="text-sm text-muted fw-600" style="margin-bottom:6px">📬 Recipients:</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">${a.recipients.map(r => `<span class="chip">${r}</span>`).join('')}</div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
+        <button class="btn btn-primary btn-sm" onclick="editAnnouncement(${a.id})">✏️ Edit</button>
+        <button class="btn btn-secondary btn-sm" onclick="showToast('Notification resent!','success')">📤 Resend</button>
+        <button class="btn btn-secondary btn-sm" onclick="printSection('detail-panel')">🖨️ Print</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteAnnouncement(${a.id})">🗑️ Delete</button>
+      </div>
+    `;
+    renderAnnouncements();
+  }
+
+  function filterAnnouncements(f) {
+    currentFilter = f;
+    document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('open'));
+    renderAnnouncements();
+    showToast(`Showing: ${f === 'all' ? 'All' : priorityConfig[f]?.label}`, 'info');
+  }
+
+  function setView(v) {
+    currentView = v;
+    document.getElementById('view-list').style.background = v === 'list' ? 'var(--accent-light)' : '';
+    document.getElementById('view-list').style.color = v === 'list' ? 'var(--accent-dark)' : '';
+    document.getElementById('view-grid').style.background = v === 'grid' ? 'var(--accent-light)' : '';
+    document.getElementById('view-grid').style.color = v === 'grid' ? 'var(--accent-dark)' : '';
+    renderAnnouncements();
+  }
+
+  function togglePin(id) {
+    const a = announcements.find(x => x.id === id);
+    if (a) {
+      a.pinned = !a.pinned;
+      announcements.sort((a, b) => b.pinned - a.pinned);
+      renderAnnouncements();
+      showToast(a.pinned ? 'Announcement pinned' : 'Announcement unpinned', 'success');
+    }
+  }
+
+  function deleteAnnouncement(id) {
+    confirmAction('Delete this announcement? This cannot be undone.', () => {
+      announcements = announcements.filter(a => a.id !== id);
+      if (selectedId === id) {
+        selectedId = null;
+        document.getElementById('detail-title').textContent = 'Select an Announcement';
+        document.getElementById('detail-meta').textContent = 'Click any item to view details';
+        document.getElementById('detail-content').innerHTML = `<div style="text-align:center;padding:40px 20px"><div style="font-size:48px;margin-bottom:12px">📢</div><p style="color:var(--text-muted)">Select an announcement to view details.</p></div>`;
+      }
+      updateCounts();
+      renderAnnouncements();
+      showToast('Announcement deleted', 'danger');
+    });
+  }
+
+  let editingId = null;
+  function editAnnouncement(id) {
+    editingId = id;
+    const a = announcements.find(x => x.id === id);
+    document.getElementById('edit-ann-title').value = a.title;
+    document.getElementById('edit-ann-body').value = a.body;
+    document.getElementById('edit-ann-cat').value = a.priority;
+    openModal('modal-edit-ann');
+  }
+
+  function updateAnnouncement() {
+    const a = announcements.find(x => x.id === editingId);
+    if (a) {
+      a.title = document.getElementById('edit-ann-title').value;
+      a.body = document.getElementById('edit-ann-body').value;
+      a.priority = document.getElementById('edit-ann-cat').value;
+      closeModal('modal-edit-ann');
+      renderAnnouncements();
+      if (selectedId === editingId) selectAnnouncement(editingId);
+      showToast('Announcement updated', 'success');
+    }
+  }
+
+  function postAnnouncement() {
+    const title = document.getElementById('new-ann-title').value.trim();
+    const body = document.getElementById('new-ann-body').value.trim();
+    const priority = document.getElementById('new-ann-cat').value;
+    if (!title || !body) { showToast('Please fill in title and message', 'danger'); return; }
+
+    const newAnn = {
+      id: Date.now(), priority, title, body,
+      author: 'Mrs. Maydelyn Joy Laudato',
+      date: new Date().toLocaleDateString('en-PH', { year: 'numeric', month: 'long', day: 'numeric' }),
+      pinned: false, recipients: getSelectedRecipients()
+    };
+    announcements.unshift(newAnn);
+    updateCounts();
+    renderAnnouncements();
+    closeModal('modal-new-ann');
+    document.getElementById('new-ann-title').value = '';
+    document.getElementById('new-ann-body').value = '';
+    showToast('Announcement posted successfully!', 'success');
+  }
+
+  function saveDraft() {
+    closeModal('modal-new-ann');
+    showToast('Draft saved', 'info');
+  }
+
+  function getSelectedRecipients() {
+    const r = [];
+    if (document.getElementById('recv-student').checked) r.push('Kim Shanelle Dava');
+    if (document.getElementById('recv-parent').checked) r.push('Ritchell Dava');
+    if (document.getElementById('recv-teacher').checked) r.push('Mrs. Maydelyn Joy Laudato');
+    if (document.getElementById('recv-all').checked) r.push('All Users');
+    return r.length ? r : ['All Students'];
+  }
+
+  function sendNotification() {
+    const r = getSelectedRecipients();
+    if (r.length === 0) { showToast('Select at least one recipient', 'danger'); return; }
+    showToast(`Notification sent to: ${r.join(', ')}`, 'success');
+  }
+
+  function updateCounts() {
+    document.getElementById('total-count').textContent = announcements.length;
+    document.getElementById('urgent-count').textContent = announcements.filter(a => a.priority === 'high').length;
+    document.getElementById('event-count').textContent = announcements.filter(a => a.priority === 'event').length;
+    document.getElementById('general-count').textContent = announcements.filter(a => a.priority !== 'high' && a.priority !== 'event').length;
+    document.getElementById('ann-badge').textContent = announcements.length;
+  }
+
+  // Search
+  document.getElementById('ann-search').addEventListener('input', renderAnnouncements);
+
+  // Set today
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('new-ann-start').value = today;
+
+  renderAnnouncements();
+  updateCounts();
+</script>
+</body>
+</html>

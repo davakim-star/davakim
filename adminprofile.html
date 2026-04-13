@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile — Admin Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">A</div>
+      <div class="logo-text">
+        <h2>AdminPortal</h2>
+        <p>Academic System</p>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <p class="sidebar-label">Main</p>
+      <div class="nav-item" data-page="adminreports.html">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        </span>
+        Reports
+      </div>
+      <div class="nav-item" data-page="adminannouncements.html">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </span>
+        Announcements
+        <span class="nav-badge">3</span>
+      </div>
+      <div class="nav-item active" data-page="adminprofile.html">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </span>
+        Profile
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <p class="sidebar-label">Academic</p>
+      <div class="nav-item" onclick="showToast('Grades module coming soon','info')">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </span>
+        Grades
+      </div>
+      <div class="nav-item" onclick="showToast('Attendance module coming soon','info')">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </span>
+        Attendance
+      </div>
+      <div class="nav-item" onclick="showToast('Subjects module coming soon','info')">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </span>
+        Subjects
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <p class="sidebar-label">System</p>
+      <div class="nav-item" onclick="showToast('Settings coming soon','info')">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </span>
+        Settings
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user" onclick="window.location.href='adminprofile.html'">
+        <div class="user-avatar">M</div>
+        <div class="user-info">
+          <div class="name">Mrs. M.J. Laudato</div>
+          <div class="role">Administrator</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- MAIN -->
+  <div class="main-content">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+        <div>
+          <div class="page-title">Profile Management</div>
+          <div class="page-subtitle">Student, Teacher & Parent Records</div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="dropdown">
+          <button class="topbar-btn" onclick="toggleDropdown('notification-dropdown')">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <span class="badge"></span>
+          </button>
+          <div class="dropdown-menu" id="notification-dropdown">
+            <div style="padding:12px 14px;font-weight:700;font-size:13px;border-bottom:1px solid var(--border)">Notifications</div>
+            <div class="dropdown-item"><span>📋</span> Profile updated</div>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item" style="justify-content:center;color:var(--accent);font-weight:600">View all</div>
+          </div>
+        </div>
+        <div class="dropdown">
+          <div class="topbar-avatar" onclick="toggleDropdown('user-dropdown')">M</div>
+          <div class="dropdown-menu" id="user-dropdown">
+            <div class="dropdown-item" onclick="scrollTo(0,0)"><span>👤</span> My Profile</div>
+            <div class="dropdown-item" onclick="showToast('Settings coming soon','info')"><span>⚙️</span> Settings</div>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item danger" onclick="confirmAction('Sign out?', ()=>showToast('Signed out','info'))"><span>🚪</span> Sign Out</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- PAGE CONTENT -->
+    <main class="page-content">
+
+      <!-- TABS -->
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="student">👩‍🎓 Student Profile</button>
+        <button class="tab-btn" data-tab="teacher">👩‍🏫 Teacher Profile</button>
+        <button class="tab-btn" data-tab="parent">👨‍👩‍👧 Parent Profile</button>
+        <button class="tab-btn" data-tab="account">🔐 Account Settings</button>
+      </div>
+
+      <!-- ===== TAB: STUDENT ===== -->
+      <div class="tab-panel active" data-tab="student">
+
+        <!-- Profile Card -->
+        <div class="card mb-6">
+          <div class="profile-cover" id="student-cover">
+            <div style="position:absolute;top:12px;right:12px">
+              <button class="btn btn-sm" style="background:rgba(255,255,255,0.2);color:#fff;border-color:rgba(255,255,255,0.3)" onclick="openModal('modal-change-cover')">📷 Change Cover</button>
+            </div>
+          </div>
+          <div class="profile-avatar-wrap">
+            <div class="profile-avatar" id="photo-preview">K</div>
+            <input type="file" id="photo-input" accept="image/*" style="display:none" />
+          </div>
+          <div class="profile-info-bar">
+            <div style="min-width:0">
+              <h2 style="font-size:20px;font-weight:800" id="disp-student-name">Kim Shanelle Dava</h2>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px">
+                <span class="badge badge-primary">3rd Year</span>
+                <span class="badge badge-success">Active</span>
+                <span class="badge badge-info">Dean's Lister</span>
+              </div>
+            </div>
+            <div class="flex gap-2" style="flex-wrap:wrap">
+              <button class="btn btn-secondary btn-sm" onclick="document.getElementById('photo-input').click()">📷 Change Photo</button>
+              <button class="btn btn-primary" onclick="openModal('modal-edit-student')">✏️ Edit Profile</button>
+            </div>
+          </div>
+
+          <!-- Info Grid -->
+          <div style="padding:0 28px 28px">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+              <div style="background:var(--bg);border-radius:10px;padding:14px 16px">
+                <p class="text-sm text-muted fw-600" style="margin-bottom:4px">Student ID</p>
+                <p class="fw-600" id="disp-student-id">2022-IT-3-001</p>
+              </div>
+              <div style="background:var(--bg);border-radius:10px;padding:14px 16px">
+                <p class="text-sm text-muted fw-600" style="margin-bottom:4px">Year Level</p>
+                <p class="fw-600" id="disp-year">3rd Year</p>
+              </div>
+              <div style="background:var(--bg);border-radius:10px;padding:14px 16px">
+                <p class="text-sm text-muted fw-600" style="margin-bottom:4px">Program</p>
+                <p class="fw-600" id="disp-program">BS Information Technology</p>
+              </div>
+              <div style="background:var(--bg);border-radius:10px;padding:14px 16px">
+                <p class="text-sm text-muted fw-600" style="margin-bottom:4px">Section</p>
+                <p class="fw-600" id="disp-section">IT3-A</p>
+              </div>
+              <div style="background:var(--bg);border-radius:10px;padding:14px 16px">
+                <p class="text-sm text-muted fw-600" style="margin-bottom:4px">Email</p>
+                <p class="fw-600" id="disp-student-email" style="word-break:break-all">kimshanelle.dava@stu.edu.ph</p>
+              </div>
+              <div style="background:var(--bg);border-radius:10px;padding:14px 16px">
+                <p class="text-sm text-muted fw-600" style="margin-bottom:4px">Contact</p>
+                <p class="fw-600" id="disp-student-contact">+63 912 345 6789</p>
+              </div>
+              <div style="background:var(--bg);border-radius:10px;padding:14px 16px">
+                <p class="text-sm text-muted fw-600" style="margin-bottom:4px">Date of Birth</p>
+                <p class="fw-600" id="disp-dob">March 15, 2004</p>
+              </div>
+              <div style="background:var(--bg);border-radius:10px;padding:14px 16px">
+                <p class="text-sm text-muted fw-600" style="margin-bottom:4px">GWA</p>
+                <p class="fw-600" id="disp-gwa" style="color:var(--accent)">1.25 — With Highest Honors</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Enrolled Subjects -->
+        <div class="grid-2 mb-6">
+          <div class="card">
+            <div class="card-header">
+              <div><h3>Enrolled Subjects</h3><p>Current Semester</p></div>
+              <button class="btn btn-sm btn-primary" onclick="openModal('modal-add-subject')">+ Add Subject</button>
+            </div>
+            <div class="card-body" style="padding:0">
+              <table>
+                <thead><tr><th>Code</th><th>Subject</th><th>Units</th><th>Schedule</th><th></th></tr></thead>
+                <tbody id="subjects-tbody">
+                  <tr>
+                    <td><span class="chip">SIA 102</span></td>
+                    <td>Systems Integration & Architecture</td>
+                    <td>3</td>
+                    <td>MWF 7:30–9:00</td>
+                    <td><button class="btn btn-ghost btn-icon btn-sm" onclick="confirmAction('Remove this subject?',()=>{this.closest('tr').remove();showToast('Subject removed','danger')})">🗑️</button></td>
+                  </tr>
+                  <tr>
+                    <td><span class="chip">WS 101</span></td>
+                    <td>Web Systems & Technologies</td>
+                    <td>3</td>
+                    <td>TTH 9:00–10:30</td>
+                    <td><button class="btn btn-ghost btn-icon btn-sm" onclick="confirmAction('Remove this subject?',()=>{this.closest('tr').remove();showToast('Subject removed','danger')})">🗑️</button></td>
+                  </tr>
+                  <tr>
+                    <td><span class="chip">CC 106</span></td>
+                    <td>Computer Concepts & Applications</td>
+                    <td>3</td>
+                    <td>MWF 1:00–2:30</td>
+                    <td><button class="btn btn-ghost btn-icon btn-sm" onclick="confirmAction('Remove this subject?',()=>{this.closest('tr').remove();showToast('Subject removed','danger')})">🗑️</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><h3>Academic Timeline</h3></div>
+            <div class="card-body">
+              <div style="display:flex;flex-direction:column;gap:14px" id="timeline">
+                <div style="display:flex;gap:14px;align-items:flex-start">
+                  <div style="width:36px;height:36px;background:var(--accent-light);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🎓</div>
+                  <div>
+                    <p class="fw-600 text-sm">Enrolled — 3rd Year, 1st Sem</p>
+                    <p class="text-sm text-muted">August 2024 · 3 subjects</p>
+                  </div>
+                </div>
+                <div style="display:flex;gap:14px;align-items:flex-start">
+                  <div style="width:36px;height:36px;background:var(--success-light);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🏆</div>
+                  <div>
+                    <p class="fw-600 text-sm">Dean's List — 2nd Year</p>
+                    <p class="text-sm text-muted">May 2024 · GWA: 1.35</p>
+                  </div>
+                </div>
+                <div style="display:flex;gap:14px;align-items:flex-start">
+                  <div style="width:36px;height:36px;background:var(--info-light);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">📋</div>
+                  <div>
+                    <p class="fw-600 text-sm">IT Quiz Bee Champion</p>
+                    <p class="text-sm text-muted">March 2024 · University Level</p>
+                  </div>
+                </div>
+                <div style="display:flex;gap:14px;align-items:flex-start">
+                  <div style="width:36px;height:36px;background:var(--warning-light);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">📚</div>
+                  <div>
+                    <p class="fw-600 text-sm">Enrolled — 1st Year</p>
+                    <p class="text-sm text-muted">August 2022 · Program started</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== TAB: TEACHER ===== -->
+      <div class="tab-panel" data-tab="teacher">
+        <div class="card mb-6">
+          <div class="profile-cover" style="background:linear-gradient(135deg,#1a3c5e,#2a5a8e)">
+            <div style="position:absolute;top:12px;right:12px">
+              <button class="btn btn-sm" style="background:rgba(255,255,255,0.2);color:#fff;border-color:rgba(255,255,255,0.3)" onclick="showToast('Cover changed','success')">📷 Change Cover</button>
+            </div>
+          </div>
+          <div class="profile-avatar-wrap">
+            <div class="profile-avatar" style="background:var(--primary)">M</div>
+          </div>
+          <div class="profile-info-bar">
+            <div>
+              <h2 style="font-size:20px;font-weight:800">Mrs. Maydelyn Joy Laudato</h2>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px">
+                <span class="badge badge-primary">Faculty</span>
+                <span class="badge badge-success">Active</span>
+                <span class="badge badge-info">Adviser</span>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <button class="btn btn-primary" onclick="openModal('modal-edit-teacher')">✏️ Edit Profile</button>
+            </div>
+          </div>
+          <div style="padding:0 28px 28px">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+              <div style="background:var(--bg);border-radius:10px;padding:14px 16px">
+                <p class="text-sm text-muted fw-600" style="margin-bottom:4px">Employee ID</p>
+                <p class="fw-600">FAC-2018-0042</p>
+              </div>
+              <div style="background:var(--bg);border-radius:10px;padding:14px 16px">
+                <p class="text-sm text-muted fw-600" style="margin-bottom:4px">Department</p>
+                <p class="fw-600">Information Technology</p>
+              </div>
+              <div style="background:var(--bg);border-radius:10px;padding:14px 16px">
+                <p class="text-sm text-muted fw-600" style="margin-bottom:4px">Email</p>
+                <p class="fw-600" style="word-break:break-all">mj.laudato@faculty.edu.ph</p>
+              </div>
+              <div style="background:var(--bg);border-radius:10px;padding:14px 16px">
+                <p class="text-sm text-muted fw-600" style="margin-bottom:4px">Contact</p>
+                <p class="fw-600">+63 917 555 0011</p>
+              </div>
+              <div style="background:var(--bg);border-radius:10px;padding:14px 16px">
+                <p class="text-sm text-muted fw-600" style="margin-bottom:4px">Specialization</p>
+                <p class="fw-600">System Development, Web Tech</p>
+              </div>
+              <div style="background:var(--bg);border-radius:10px;padding:14px 16px">
+                <p class="text-sm text-muted fw-600" style="margin-bottom:4px">Years of Service</p>
+                <p class="fw-600">7 Years</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header"><h3>Handled Subjects</h3></div>
+            <div class="card-body" style="padding:0">
+              <table>
+                <thead><tr><th>Code</th><th>Subject</th><th>Section</th><th>Students</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="chip">SIA 102</span></td><td>Systems Integration & Architecture</td><td>IT3-A</td><td>32</td></tr>
+                  <tr><td><span class="chip">WS 101</span></td><td>Web Systems & Technologies</td><td>IT3-A</td><td>32</td></tr>
+                  <tr><td><span class="chip">CC 106</span></td><td>Computer Concepts & Applications</td><td>IT3-A</td><td>32</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><h3>Teacher Statistics</h3></div>
+            <div class="card-body">
+              <div style="display:flex;flex-direction:column;gap:16px">
+                <div>
+                  <div class="flex-between mb-4"><span class="text-sm fw-600">Student Satisfaction</span><span class="text-sm text-muted">96%</span></div>
+                  <div class="progress"><div class="progress-bar" style="width:96%"></div></div>
+                </div>
+                <div>
+                  <div class="flex-between mb-4"><span class="text-sm fw-600">Classes Handled</span><span class="text-sm text-muted">3 subjects</span></div>
+                  <div class="progress"><div class="progress-bar" style="width:100%;background:var(--info)"></div></div>
+                </div>
+                <div>
+                  <div class="flex-between mb-4"><span class="text-sm fw-600">Grade Submission Rate</span><span class="text-sm text-muted">100%</span></div>
+                  <div class="progress"><div class="progress-bar" style="width:100%;background:var(--success)"></div></div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px">
+                  <div style="background:var(--accent-light);border-radius:10px;padding:14px;text-align:center">
+                    <div style="font-size:22px;font-weight:800;color:var(--accent)">96</div>
+                    <div class="text-sm text-muted">Total Students</div>
+                  </div>
+                  <div style="background:var(--success-light);border-radius:10px;padding:14px;text-align:center">
+                    <div style="font-size:22px;font-weight:800;color:var(--success)">7</div>
+                    <div class="text-sm text-muted">Years Service</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== TAB: PARENT ===== -->
+      <div class="tab-panel" data-tab="parent">
+        <div class="card mb-6">
+          <div class="profile-cover" style="background:linear-gradient(135deg,#2d7a5e,#00b4a0)">
+            <div style="position:absolute;top:12px;right:12px">
+              <button class="btn btn-sm" style="background:rgba(255,255,255,0.2);color:#fff;border-color:rgba(255,255,255,0.3)" onclick="showToast('Cover changed','success')">📷 Change Cover</button>
+            </div>
+          </div>
+          <div class="profile-avatar-wrap">
+            <div class="profile-avatar" style="background:#2d7a5e">R</div>
+          </div>
+          <div class="profile-info-bar">
+            <div>
+              <h2 style="font-size:20px;font-weight:800">Ritchell Dava</h2>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px">
+                <span class="badge badge-primary">Parent / Guardian</span>
+                <span class="badge badge-success">Active</span>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <button class="btn btn-primary" onclick="openModal('modal-edit-parent')">✏️ Edit Profile</button>
+            </div>
+          </div>
+          <div style="padding:0 28px 28px">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+              <div style="background:var(--bg);border-radius:10px;padding:14px 16px">
+                <p class="text-sm text-muted fw-600" style="margin-bottom:4px">Relationship</p>
+                <p class="fw-600" id="disp-parent-rel">Mother</p>
+              </div>
+              <div style="background:var(--bg);border-radius:10px;padding:14px 16px">
+                <p class="text-sm text-muted fw-600" style="margin-bottom:4px">Email</p>
+                <p class="fw-600" id="disp-parent-email" style="word-break:break-all">ritchell.dava@gmail.com</p>
+              </div>
+              <div style="background:var(--bg);border-radius:10px;padding:14px 16px">
+                <p class="text-sm text-muted fw-600" style="margin-bottom:4px">Contact</p>
+                <p class="fw-600" id="disp-parent-contact">+63 918 765 4321</p>
+              </div>
+              <div style="background:var(--bg);border-radius:10px;padding:14px 16px">
+                <p class="text-sm text-muted fw-600" style="margin-bottom:4px">Address</p>
+                <p class="fw-600" id="disp-parent-address">Iloilo City, Western Visayas</p>
+              </div>
+              <div style="background:var(--bg);border-radius:10px;padding:14px 16px">
+                <p class="text-sm text-muted fw-600" style="margin-bottom:4px">Occupation</p>
+                <p class="fw-600" id="disp-parent-occupation">Government Employee</p>
+              </div>
+              <div style="background:var(--bg);border-radius:10px;padding:14px 16px">
+                <p class="text-sm text-muted fw-600" style="margin-bottom:4px">Ward / Student</p>
+                <p class="fw-600">Kim Shanelle Dava</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header">
+              <h3>Parent Portal Access</h3>
+            </div>
+            <div class="card-body">
+              <div style="display:flex;flex-direction:column;gap:14px">
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--bg);border-radius:8px">
+                  <div>
+                    <p class="fw-600 text-sm">Grade Notifications</p>
+                    <p class="text-sm text-muted">Receive email when grades are posted</p>
+                  </div>
+                  <label class="toggle-switch" style="position:relative;display:inline-block;width:44px;height:24px">
+                    <input type="checkbox" checked id="toggle-grades" style="display:none" onchange="showToast('Preference saved','success')">
+                    <span onclick="this.previousElementSibling.checked=!this.previousElementSibling.checked;showToast('Preference saved','success')" style="position:absolute;cursor:pointer;inset:0;background:var(--accent);border-radius:12px;transition:0.2s"></span>
+                    <span style="position:absolute;width:18px;height:18px;left:3px;top:3px;background:#fff;border-radius:50%;pointer-events:none"></span>
+                  </label>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--bg);border-radius:8px">
+                  <div>
+                    <p class="fw-600 text-sm">Attendance Alerts</p>
+                    <p class="text-sm text-muted">Notified on absences</p>
+                  </div>
+                  <label class="toggle-switch" style="position:relative;display:inline-block;width:44px;height:24px">
+                    <input type="checkbox" checked id="toggle-att" style="display:none">
+                    <span onclick="this.previousElementSibling.checked=!this.previousElementSibling.checked;showToast('Preference saved','success')" style="position:absolute;cursor:pointer;inset:0;background:var(--accent);border-radius:12px;transition:0.2s"></span>
+                    <span style="position:absolute;width:18px;height:18px;left:3px;top:3px;background:#fff;border-radius:50%;pointer-events:none"></span>
+                  </label>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--bg);border-radius:8px">
+                  <div>
+                    <p class="fw-600 text-sm">Announcements</p>
+                    <p class="text-sm text-muted">School-wide announcements</p>
+                  </div>
+                  <label class="toggle-switch" style="position:relative;display:inline-block;width:44px;height:24px">
+                    <input type="checkbox" checked id="toggle-ann" style="display:none">
+                    <span onclick="this.previousElementSibling.checked=!this.previousElementSibling.checked;showToast('Preference saved','success')" style="position:absolute;cursor:pointer;inset:0;background:var(--accent);border-radius:12px;transition:0.2s"></span>
+                    <span style="position:absolute;width:18px;height:18px;left:3px;top:3px;background:#fff;border-radius:50%;pointer-events:none"></span>
+                  </label>
+                </div>
+              </div>
+              <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:16px" onclick="showToast('Invitation sent to Ritchell Dava','success')">
+                📧 Send Portal Invitation
+              </button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><h3>Communication Log</h3></div>
+            <div class="card-body" style="padding:0">
+              <table>
+                <thead><tr><th>Date</th><th>Type</th><th>Subject</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr><td>Apr 10</td><td><span class="badge badge-info">Email</span></td><td>Q3 Grade Report</td><td><span class="badge badge-success">Sent</span></td></tr>
+                  <tr><td>Apr 7</td><td><span class="badge badge-primary">SMS</span></td><td>Absence Alert</td><td><span class="badge badge-success">Delivered</span></td></tr>
+                  <tr><td>Mar 28</td><td><span class="badge badge-info">Email</span></td><td>Dean's List Notice</td><td><span class="badge badge-success">Read</span></td></tr>
+                  <tr><td>Mar 15</td><td><span class="badge badge-warning">Call</span></td><td>Adviser Meeting</td><td><span class="badge badge-success">Done</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== TAB: ACCOUNT SETTINGS ===== -->
+      <div class="tab-panel" data-tab="account">
+        <div class="grid-2" style="align-items:start">
+          <div>
+            <div class="card mb-6">
+              <div class="card-header"><h3>Account Information</h3></div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label>Full Name</label>
+                  <input type="text" class="form-control" id="acc-name" value="Mrs. Maydelyn Joy Laudato" />
+                </div>
+                <div class="form-group">
+                  <label>Username</label>
+                  <input type="text" class="form-control" id="acc-username" value="mj.laudato" />
+                </div>
+                <div class="form-group">
+                  <label>Email Address</label>
+                  <input type="email" class="form-control" id="acc-email" value="mj.laudato@faculty.edu.ph" />
+                </div>
+                <div class="form-group">
+                  <label>Role</label>
+                  <select class="form-control" id="acc-role">
+                    <option selected>Administrator</option>
+                    <option>Faculty</option>
+                    <option>Registrar</option>
+                  </select>
+                </div>
+                <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="saveAccountInfo()">
+                  💾 Save Changes
+                </button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header"><h3>🔐 Change Password</h3></div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label>Current Password</label>
+                  <input type="password" class="form-control" id="pw-current" placeholder="••••••••" />
+                </div>
+                <div class="form-group">
+                  <label>New Password</label>
+                  <input type="password" class="form-control" id="pw-new" placeholder="Min. 8 characters" />
+                </div>
+                <div class="form-group">
+                  <label>Confirm Password</label>
+                  <input type="password" class="form-control" id="pw-confirm" placeholder="Repeat new password" />
+                </div>
+                <div id="pw-strength" style="margin-bottom:14px;display:none">
+                  <p class="text-sm text-muted mb-4">Password strength:</p>
+                  <div class="progress"><div class="progress-bar" id="pw-bar" style="width:0%"></div></div>
+                </div>
+                <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="changePassword()">🔒 Update Password</button>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card mb-6">
+              <div class="card-header"><h3>Preferences</h3></div>
+              <div class="card-body">
+                <div style="display:flex;flex-direction:column;gap:14px">
+                  <div style="display:flex;align-items:center;justify-content:space-between">
+                    <div>
+                      <p class="fw-600 text-sm">Email Notifications</p>
+                      <p class="text-sm text-muted">Receive system emails</p>
+                    </div>
+                    <button class="btn btn-sm" id="toggle-email-btn" onclick="togglePref(this)" style="background:var(--accent);color:#fff;border-color:var(--accent)">ON</button>
+                  </div>
+                  <div style="border-top:1px solid var(--border);padding-top:14px;display:flex;align-items:center;justify-content:space-between">
+                    <div>
+                      <p class="fw-600 text-sm">SMS Alerts</p>
+                      <p class="text-sm text-muted">Text notifications for urgent items</p>
+                    </div>
+                    <button class="btn btn-sm btn-secondary" id="toggle-sms-btn" onclick="togglePref(this)">OFF</button>
+                  </div>
+                  <div style="border-top:1px solid var(--border);padding-top:14px;display:flex;align-items:center;justify-content:space-between">
+                    <div>
+                      <p class="fw-600 text-sm">Two-Factor Auth</p>
+                      <p class="text-sm text-muted">Extra security for your account</p>
+                    </div>
+                    <button class="btn btn-sm btn-secondary" id="toggle-2fa-btn" onclick="enable2FA(this)">Enable</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mb-6">
+              <div class="card-header"><h3>Session Activity</h3></div>
+              <div class="card-body" style="padding:0">
+                <table>
+                  <thead><tr><th>Device</th><th>Last Active</th><th>Location</th><th></th></tr></thead>
+                  <tbody>
+                    <tr>
+                      <td>💻 Chrome / Windows</td>
+                      <td><span class="badge badge-success">Active now</span></td>
+                      <td>Iloilo City</td>
+                      <td><span class="badge badge-primary">Current</span></td>
+                    </tr>
+                    <tr>
+                      <td>📱 Mobile App</td>
+                      <td>2 hours ago</td>
+                      <td>Iloilo City</td>
+                      <td><button class="btn btn-ghost btn-sm" onclick="confirmAction('Revoke this session?',()=>{this.closest('tr').remove();showToast('Session revoked','danger')})">Revoke</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card" style="border-color:var(--danger)">
+              <div class="card-header"><h3 style="color:var(--danger)">⚠️ Danger Zone</h3></div>
+              <div class="card-body">
+                <div style="display:flex;flex-direction:column;gap:12px">
+                  <div style="display:flex;align-items:center;justify-content:space-between">
+                    <div>
+                      <p class="fw-600 text-sm">Sign Out All Devices</p>
+                      <p class="text-sm text-muted">Removes all active sessions</p>
+                    </div>
+                    <button class="btn btn-sm btn-secondary" onclick="confirmAction('Sign out all devices?',()=>showToast('All sessions terminated','danger'))">Sign Out All</button>
+                  </div>
+                  <div style="border-top:1px solid var(--border);padding-top:12px;display:flex;align-items:center;justify-content:space-between">
+                    <div>
+                      <p class="fw-600 text-sm" style="color:var(--danger)">Deactivate Account</p>
+                      <p class="text-sm text-muted">Account will be disabled</p>
+                    </div>
+                    <button class="btn btn-sm btn-danger" onclick="confirmAction('Deactivate your account? This is reversible by admin.',()=>showToast('Request submitted to super admin','info'))">Deactivate</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<div class="toast-container"></div>
+
+<!-- MODAL: EDIT STUDENT -->
+<div class="modal-overlay" id="modal-edit-student">
+  <div class="modal" style="max-width:580px">
+    <div class="modal-header">
+      <h3>Edit Student Profile</h3>
+      <button class="modal-close" onclick="closeModal('modal-edit-student')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" class="form-control" id="edit-firstname" value="Kim Shanelle" />
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" class="form-control" id="edit-lastname" value="Dava" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Student ID</label>
+          <input type="text" class="form-control" id="edit-stud-id" value="2022-IT-3-001" />
+        </div>
+        <div class="form-group">
+          <label>Year Level</label>
+          <select class="form-control" id="edit-year">
+            <option>1st Year</option><option>2nd Year</option><option selected>3rd Year</option><option>4th Year</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Program</label>
+          <input type="text" class="form-control" value="BS Information Technology" />
+        </div>
+        <div class="form-group">
+          <label>Section</label>
+          <input type="text" class="form-control" value="IT3-A" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" class="form-control" value="kimshanelle.dava@stu.edu.ph" />
+        </div>
+        <div class="form-group">
+          <label>Contact No.</label>
+          <input type="tel" class="form-control" value="+63 912 345 6789" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Date of Birth</label>
+          <input type="date" class="form-control" value="2004-03-15" />
+        </div>
+        <div class="form-group">
+          <label>Status</label>
+          <select class="form-control">
+            <option selected>Active</option><option>Inactive</option><option>On Leave</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Address</label>
+        <input type="text" class="form-control" value="Iloilo City, Western Visayas, Philippines" />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-edit-student')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveStudentProfile()">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: EDIT TEACHER -->
+<div class="modal-overlay" id="modal-edit-teacher">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Edit Teacher Profile</h3>
+      <button class="modal-close" onclick="closeModal('modal-edit-teacher')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" class="form-control" value="Maydelyn Joy" />
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" class="form-control" value="Laudato" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Employee ID</label>
+          <input type="text" class="form-control" value="FAC-2018-0042" />
+        </div>
+        <div class="form-group">
+          <label>Department</label>
+          <input type="text" class="form-control" value="Information Technology" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" class="form-control" value="mj.laudato@faculty.edu.ph" />
+        </div>
+        <div class="form-group">
+          <label>Contact</label>
+          <input type="tel" class="form-control" value="+63 917 555 0011" />
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-edit-teacher')">Cancel</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-edit-teacher');showToast('Teacher profile updated','success')">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: EDIT PARENT -->
+<div class="modal-overlay" id="modal-edit-parent">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Edit Parent Profile</h3>
+      <button class="modal-close" onclick="closeModal('modal-edit-parent')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" class="form-control" value="Ritchell Dava" />
+        </div>
+        <div class="form-group">
+          <label>Relationship</label>
+          <select class="form-control" id="edit-parent-rel">
+            <option selected>Mother</option><option>Father</option><option>Guardian</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" class="form-control" value="ritchell.dava@gmail.com" />
+        </div>
+        <div class="form-group">
+          <label>Contact No.</label>
+          <input type="tel" class="form-control" value="+63 918 765 4321" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Address</label>
+        <input type="text" class="form-control" value="Iloilo City, Western Visayas" />
+      </div>
+      <div class="form-group">
+        <label>Occupation</label>
+        <input type="text" class="form-control" value="Government Employee" />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-edit-parent')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveParentProfile()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: ADD SUBJECT -->
+<div class="modal-overlay" id="modal-add-subject">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Add Subject</h3>
+      <button class="modal-close" onclick="closeModal('modal-add-subject')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Subject Code</label>
+          <input type="text" class="form-control" id="new-subj-code" placeholder="e.g. IT 301" />
+        </div>
+        <div class="form-group">
+          <label>Units</label>
+          <input type="number" class="form-control" id="new-subj-units" value="3" min="1" max="6" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Subject Name</label>
+        <input type="text" class="form-control" id="new-subj-name" placeholder="Subject description" />
+      </div>
+      <div class="form-group">
+        <label>Schedule</label>
+        <input type="text" class="form-control" id="new-subj-sched" placeholder="e.g. MWF 7:30–9:00" />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-add-subject')">Cancel</button>
+      <button class="btn btn-primary" onclick="addSubject()">Add Subject</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: CHANGE COVER -->
+<div class="modal-overlay" id="modal-change-cover">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Change Cover Photo</h3>
+      <button class="modal-close" onclick="closeModal('modal-change-cover')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px">
+        <div onclick="setCover('linear-gradient(135deg,#1a3c5e,#00b4a0)')" style="height:60px;border-radius:8px;cursor:pointer;border:2px solid transparent;background:linear-gradient(135deg,#1a3c5e,#00b4a0)"></div>
+        <div onclick="setCover('linear-gradient(135deg,#2d7a5e,#1a3c5e)')" style="height:60px;border-radius:8px;cursor:pointer;border:2px solid transparent;background:linear-gradient(135deg,#2d7a5e,#1a3c5e)"></div>
+        <div onclick="setCover('linear-gradient(135deg,#6b46c1,#00b4a0)')" style="height:60px;border-radius:8px;cursor:pointer;border:2px solid transparent;background:linear-gradient(135deg,#6b46c1,#00b4a0)"></div>
+        <div onclick="setCover('linear-gradient(135deg,#c05621,#1a3c5e)')" style="height:60px;border-radius:8px;cursor:pointer;border:2px solid transparent;background:linear-gradient(135deg,#c05621,#1a3c5e)"></div>
+        <div onclick="setCover('linear-gradient(135deg,#2c7a7b,#2d3748)')" style="height:60px;border-radius:8px;cursor:pointer;border:2px solid transparent;background:linear-gradient(135deg,#2c7a7b,#2d3748)"></div>
+        <div onclick="setCover('linear-gradient(135deg,#553c9a,#ee4b2b)')" style="height:60px;border-radius:8px;cursor:pointer;border:2px solid transparent;background:linear-gradient(135deg,#553c9a,#ee4b2b)"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-change-cover')">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="apps.js"></script>
+<script>
+  document.querySelector('.hamburger').onclick = openSidebar;
+  document.querySelector('.sidebar-overlay').onclick = closeSidebar;
+
+  // Password strength
+  document.getElementById('pw-new')?.addEventListener('input', function() {
+    const v = this.value;
+    const strength = document.getElementById('pw-strength');
+    const bar = document.getElementById('pw-bar');
+    strength.style.display = v ? 'block' : 'none';
+    let score = 0;
+    if (v.length >= 8) score++;
+    if (/[A-Z]/.test(v)) score++;
+    if (/[0-9]/.test(v)) score++;
+    if (/[^A-Za-z0-9]/.test(v)) score++;
+    const colors = ['#e53e3e', '#d69e2e', '#38a169', '#00b4a0'];
+    const widths = ['25%', '50%', '75%', '100%'];
+    bar.style.width = widths[score - 1] || '10%';
+    bar.style.background = colors[score - 1] || '#e53e3e';
+  });
+
+  function changePassword() {
+    const cur = document.getElementById('pw-current').value;
+    const n = document.getElementById('pw-new').value;
+    const c = document.getElementById('pw-confirm').value;
+    if (!cur) { showToast('Enter current password', 'danger'); return; }
+    if (n.length < 8) { showToast('New password must be 8+ characters', 'danger'); return; }
+    if (n !== c) { showToast('Passwords do not match', 'danger'); return; }
+    showToast('Password updated successfully!', 'success');
+    document.getElementById('pw-current').value = '';
+    document.getElementById('pw-new').value = '';
+    document.getElementById('pw-confirm').value = '';
+    document.getElementById('pw-strength').style.display = 'none';
+  }
+
+  function saveAccountInfo() {
+    showToast('Account info saved successfully', 'success');
+  }
+
+  function saveStudentProfile() {
+    const fn = document.getElementById('edit-firstname').value;
+    const ln = document.getElementById('edit-lastname').value;
+    const yr = document.getElementById('edit-year').value;
+    document.getElementById('disp-student-name').textContent = fn + ' ' + ln;
+    document.getElementById('disp-year').textContent = yr;
+    closeModal('modal-edit-student');
+    showToast('Student profile updated', 'success');
+  }
+
+  function saveParentProfile() {
+    closeModal('modal-edit-parent');
+    showToast('Parent profile updated', 'success');
+  }
+
+  function addSubject() {
+    const code = document.getElementById('new-subj-code').value.trim();
+    const name = document.getElementById('new-subj-name').value.trim();
+    const units = document.getElementById('new-subj-units').value;
+    const sched = document.getElementById('new-subj-sched').value.trim();
+    if (!code || !name) { showToast('Fill in code and subject name', 'danger'); return; }
+    const tbody = document.getElementById('subjects-tbody');
+    tbody.insertAdjacentHTML('beforeend', `<tr>
+      <td><span class="chip">${code}</span></td>
+      <td>${name}</td><td>${units}</td><td>${sched || '—'}</td>
+      <td><button class="btn btn-ghost btn-icon btn-sm" onclick="confirmAction('Remove?',()=>{this.closest('tr').remove();showToast('Removed','danger')})">🗑️</button></td>
+    </tr>`);
+    closeModal('modal-add-subject');
+    showToast('Subject added', 'success');
+  }
+
+  function setCover(gradient) {
+    document.getElementById('student-cover').style.background = gradient;
+    closeModal('modal-change-cover');
+    showToast('Cover updated', 'success');
+  }
+
+  function togglePref(btn) {
+    const isOn = btn.textContent === 'ON';
+    btn.textContent = isOn ? 'OFF' : 'ON';
+    if (!isOn) {
+      btn.style.background = 'var(--accent)';
+      btn.style.color = '#fff';
+      btn.style.borderColor = 'var(--accent)';
+    } else {
+      btn.style.background = '';
+      btn.style.color = '';
+      btn.style.borderColor = '';
+    }
+    showToast('Preference saved', 'success');
+  }
+
+  function enable2FA(btn) {
+    btn.textContent = 'Enabled';
+    btn.style.background = 'var(--accent)';
+    btn.style.color = '#fff';
+    btn.style.borderColor = 'var(--accent)';
+    showToast('Two-factor authentication enabled', 'success');
+  }
+</script>
+</body>
+</html>
