@@ -31,9 +31,6 @@ const LAYOUTS = {
       { href: 'admindashboard.html', icon: '⊞', label: 'Dashboard' },
       { href: 'admininsights.html', icon: '📈', label: 'Insights' },
       { href: 'adminusers.html', icon: '👥', label: 'User Management' },
-      { href: 'adminreports.html', icon: '📋', label: 'Reports' },
-      { href: 'adminannouncements.html', icon: '📢', label: 'Announcements' },
-      { href: 'adminprofile.html', icon: '👤', label: 'Profile' },
     ]
   },
   parent: {
