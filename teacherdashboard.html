@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>EduTrack — Teacher Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div id="app-root"></div>
+<script src="layout.js"></script>
+<script>
+buildLayout('teacher');
+document.getElementById('page-main').innerHTML = `
+<div class="page-header">
+  <div class="header-left">
+    <h1>Welcome back, Mrs. Laudato! 🍎</h1>
+    <p class="subtitle">You have 3 classes to teach today.</p>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-primary" onclick="openModal('modal-grade')">+ Post New Grade</button>
+  </div>
+</div>
+
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-icon red">👥</div>
+    <div class="stat-info">
+      <div class="stat-label">Total Students</div>
+      <div class="stat-value">90</div>
+    </div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon green">📚</div>
+    <div class="stat-info">
+      <div class="stat-label">Active Classes</div>
+      <div class="stat-value">3</div>
+    </div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon blue">📅</div>
+    <div class="stat-info">
+      <div class="stat-label">Avg. Attendance</div>
+      <div class="stat-value">94%</div>
+    </div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon orange">💬</div>
+    <div class="stat-info">
+      <div class="stat-label">New Messages</div>
+      <div class="stat-value">12</div>
+    </div>
+  </div>
+</div>
+
+<div class="two-col" style="margin-bottom:20px;">
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Class Performance Average</span>
+      <div class="dropdown">
+        <button class="btn btn-secondary btn-sm" data-dropdown="dd-chart">⋯</button>
+        <div class="dropdown-menu" id="dd-chart">
+          <div class="dropdown-item" onclick="showToast('Exporting chart...','default')">📤 Export Chart</div>
+          <div class="dropdown-item" onclick="showToast('Report generated','success')">📋 Generate Report</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="bar-chart" style="height:200px;">
+        <div class="bar-item">
+          <div class="bar-val">86</div>
+          <div class="bar" style="height:86%;" title="SIA 102: 86"></div>
+          <div class="bar-label">SIA 102</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-val">79</div>
+          <div class="bar" style="height:79%;background:#C0392B;" title="WS 101: 79"></div>
+          <div class="bar-label">WS 101</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-val">91</div>
+          <div class="bar" style="height:91%;" title="CC 106: 91"></div>
+          <div class="bar-label">CC 106</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Recent Submissions</span>
+      <a href="teachergrades.html" style="font-size:12.5px;color:#8B1A1A;text-decoration:none;font-weight:600;">View All →</a>
+    </div>
+    <div class="card-body" style="padding:10px 16px;">
+      <ul class="notif-list">
+        <li class="notif-item">
+          <div class="avatar avatar-sm avatar-red">KD</div>
+          <div class="notif-content">
+            <div class="notif-title">Kim Shanelle Dava</div>
+            <div class="notif-desc">SIA 102 • 10 mins ago</div>
+          </div>
+          <span style="font-size:18px;color:#E67E22;">⏱</span>
+        </li>
+        <li class="notif-item">
+          <div class="avatar avatar-sm avatar-blue">JS</div>
+          <div class="notif-content">
+            <div class="notif-title">John Smith</div>
+            <div class="notif-desc">WS 101 • 45 mins ago</div>
+          </div>
+          <span style="font-size:18px;color:#27AE60;">✅</span>
+        </li>
+        <li class="notif-item">
+          <div class="avatar avatar-sm avatar-purple">AW</div>
+          <div class="notif-content">
+            <div class="notif-title">Alice Wong</div>
+            <div class="notif-desc">CC 106 • 2 hours ago</div>
+          </div>
+          <span style="font-size:18px;color:#E67E22;">⏱</span>
+        </li>
+        <li class="notif-item">
+          <div class="avatar avatar-sm avatar-teal">BM</div>
+          <div class="notif-content">
+            <div class="notif-title">Bob Miller</div>
+            <div class="notif-desc">SIA 102 • Yesterday</div>
+          </div>
+          <span style="font-size:18px;color:#27AE60;">✅</span>
+        </li>
+        <li class="notif-item">
+          <div class="avatar avatar-sm avatar-orange">CR</div>
+          <div class="notif-content">
+            <div class="notif-title">Clara Reyes</div>
+            <div class="notif-desc">WS 101 • Yesterday</div>
+          </div>
+          <span style="font-size:18px;color:#27AE60;">✅</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<h2 style="font-family:'Poppins',sans-serif;font-size:16px;font-weight:700;margin-bottom:14px;">My Classes</h2>
+<div class="class-cards">
+  <div class="class-card" onclick="window.location.href='teacherclassmanagement.html'">
+    <div class="class-card-top">
+      <div class="class-card-icon">📚</div>
+      <span class="class-card-code">SIA 102</span>
+    </div>
+    <div class="class-card-title">Systems Integration</div>
+    <div class="class-card-meta">32 Students Enrolled</div>
+    <div class="class-card-footer">
+      <span>⏰ 08:00 AM – 10:00 AM</span>
+      <span>📍 Lab 402</span>
+    </div>
+  </div>
+  <div class="class-card" onclick="window.location.href='teacherclassmanagement.html'">
+    <div class="class-card-top">
+      <div class="class-card-icon">🌐</div>
+      <span class="class-card-code">WS 101</span>
+    </div>
+    <div class="class-card-title">Web Systems</div>
+    <div class="class-card-meta">28 Students Enrolled</div>
+    <div class="class-card-footer">
+      <span>⏰ 10:30 AM – 12:30 PM</span>
+      <span>📍 Room 305</span>
+    </div>
+  </div>
+  <div class="class-card" onclick="window.location.href='teacherclassmanagement.html'">
+    <div class="class-card-top">
+      <div class="class-card-icon">💻</div>
+      <span class="class-card-code">CC 106</span>
+    </div>
+    <div class="class-card-title">App Development</div>
+    <div class="class-card-meta">30 Students Enrolled</div>
+    <div class="class-card-footer">
+      <span>⏰ 01:30 PM – 03:30 PM</span>
+      <span>📍 Lab 405</span>
+    </div>
+  </div>
+</div>
+`;
+
+// Modal HTML
+document.body.insertAdjacentHTML('beforeend', `
+<div class="modal-overlay" id="modal-grade">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">Post New Grade</span>
+      <button class="modal-close">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Subject</label>
+        <select class="form-control form-select">
+          <option>SIA 102 – Systems Integration</option>
+          <option>WS 101 – Web Systems</option>
+          <option>CC 106 – App Development</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Assessment Type</label>
+        <select class="form-control form-select">
+          <option>Quiz</option>
+          <option>Midterm Exam</option>
+          <option>Final Exam</option>
+          <option>Project</option>
+          <option>Activity</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Student</label>
+        <select class="form-control form-select">
+          <option>Kim Shanelle Dava</option>
+          <option>All Students (Batch)</option>
+        </select>
+      </div>
+      <div class="two-col-equal">
+        <div class="form-group">
+          <label class="form-label">Score</label>
+          <input type="number" class="form-control" placeholder="0" min="0" max="100">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Total Points</label>
+          <input type="number" class="form-control" placeholder="100">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Remarks (optional)</label>
+        <textarea class="form-control" placeholder="Enter remarks..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-grade')">Cancel</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-grade');showToast('Grade posted successfully!','success')">Post Grade</button>
+    </div>
+  </div>
+</div>
+`);
+</script>
+<script src="app.js"></script>
+</body>
+</html>

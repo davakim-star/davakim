@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>EduTrack – AI Insights</title><link rel="stylesheet" href="styles.css"/></head>
+<body>
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+<aside class="sidebar student" id="sidebar">
+  <div class="sb-logo"><div class="sb-logo-icon">📚</div><span class="sb-logo-text">EduTrack</span></div>
+  <nav class="sb-nav">
+    <div class="sb-section">Main</div>
+    <a href="studentdashboard.html" class="sb-link"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</a>
+    <a href="studentgrades.html" class="sb-link"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Grades</a>
+    <a href="studentattendance.html" class="sb-link"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Attendance</a>
+    <a href="studentassignments.html" class="sb-link"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Assignments</a>
+    <a href="studentai.html" class="sb-link active"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>AI Insights</a>
+    <div class="sb-section">Account</div>
+    <a href="studentprofile.html" class="sb-link"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>My Profile</a>
+  </nav>
+  <div class="sb-footer">
+    <div class="sb-user"><div class="sb-avatar">KD</div><div><div class="sb-user-name">Kim Shanelle Dava</div><div class="sb-user-sub">3rd Year · BSCS</div></div></div>
+    <div class="sb-signout" onclick="signOut()"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sign Out</div>
+  </div>
+</aside>
+<div class="main">
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="hamburger" onclick="toggleSidebar()"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <div><div class="topbar-title">🤖 AI Academic Insights</div><div class="topbar-sub">Personalized analysis for Kim Shanelle Dava</div></div>
+    </div>
+    <div class="topbar-right">
+      <button class="btn btn-sm btn-secondary" onclick="refreshInsights()">🔄 Refresh</button>
+      <div class="tb-user"><div class="tb-avatar" style="background:#1E3A5F">KD</div><div><div class="tb-name">Kim S. Dava</div><div class="tb-role">Student</div></div></div>
+    </div>
+  </header>
+  <div class="page">
+    <!-- Hero insight banner -->
+    <div class="profile-hero" style="margin-bottom:22px">
+      <div style="position:relative;z-index:1">
+        <div style="font-size:2rem;margin-bottom:10px">🎯</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:1.4rem;margin-bottom:8px">Dean's List Trajectory</div>
+        <p style="font-size:.875rem;opacity:.85;max-width:480px;line-height:1.6">Based on your current GWA of 1.45 and consistent attendance at 94%, you are on track to qualify for the Dean's List this semester. Maintaining your current academic performance is key.</p>
+        <button class="btn btn-sm" style="margin-top:14px;background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.3)" onclick="toast('Full academic report saved to your profile!','success')">📄 Save Full Report</button>
+      </div>
+    </div>
+
+    <!-- Insight cards grid -->
+    <div class="g3" style="margin-bottom:22px">
+      <div class="insight-card">
+        <div class="insight-icon">📈</div>
+        <div class="insight-title">Strong Performance in SIA 102</div>
+        <div class="insight-body">Your GWA of 1.25 in Systems Integration is your strongest subject. Your quiz average of 92% shows excellent concept mastery. Keep this consistency through finals.</div>
+        <div style="margin-top:12px"><span class="badge badge-green">Excellent</span></div>
+      </div>
+      <div class="insight-card" style="background:linear-gradient(135deg,var(--amber-bg),#fff);border-color:var(--amber-bg)">
+        <div class="insight-icon">⚡</div>
+        <div class="insight-title">CC 106 Needs Attention</div>
+        <div class="insight-body">Your GWA of 1.75 in Computer Concepts is your lowest. Focus on improving your class standing score. Schedule additional review sessions before the final exam.</div>
+        <div style="margin-top:12px"><span class="badge badge-amber">Needs Improvement</span></div>
+      </div>
+      <div class="insight-card" style="background:linear-gradient(135deg,var(--blue-bg),#fff);border-color:var(--blue-bg)">
+        <div class="insight-icon">⏰</div>
+        <div class="insight-title">Deadline Alert</div>
+        <div class="insight-body">You have 3 pending assignments in the next 7 days. Prioritize the SIA 102 System Architecture Diagram due April 15 — it carries significant weight.</div>
+        <div style="margin-top:12px"><span class="badge badge-blue">Action Required</span></div>
+      </div>
+    </div>
+
+    <!-- Subject recommendations -->
+    <div class="g2">
+      <div class="card">
+        <div class="card-head"><div><div class="card-title">Subject Recommendations</div><div class="card-sub">Personalized study tips</div></div></div>
+        <div class="card-body" style="display:flex;flex-direction:column;gap:14px">
+          <div class="alert alert-green">
+            <div class="alert-title">SIA 102 – Maintain Excellence</div>
+            <div class="alert-body">Continue your strong performance. Review API integration concepts ahead of the next lab exercise.</div>
+          </div>
+          <div class="alert alert-blue">
+            <div class="alert-title">WS 101 – Good Progress</div>
+            <div class="alert-body">Your lab work (95%) is excellent. Ensure your portfolio website assignment demonstrates all CSS concepts covered.</div>
+          </div>
+          <div class="alert alert-amber">
+            <div class="alert-title">CC 106 – Focus Area</div>
+            <div class="alert-body">Attend all remaining sessions. Ask Mrs. Laudato for practice exercises on database design concepts.</div>
+          </div>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="card">
+          <div class="card-head"><div class="card-title">Academic Forecast</div></div>
+          <div class="card-body">
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:.82rem;font-weight:600">Dean's List Chance</span><span style="font-weight:700;color:var(--green)">87%</span></div>
+                <div class="prog-track"><div class="prog-fill green" style="width:87%"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:.82rem;font-weight:600">SIA 102 Projected Grade</span><span style="font-weight:700;color:var(--green)">1.25</span></div>
+                <div class="prog-track"><div class="prog-fill green" style="width:92%"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:.82rem;font-weight:600">WS 101 Projected Grade</span><span style="font-weight:700;color:var(--blue)">1.50</span></div>
+                <div class="prog-track"><div class="prog-fill blue" style="width:85%"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:.82rem;font-weight:600">CC 106 Projected Grade</span><span style="font-weight:700;color:var(--amber)">1.75</span></div>
+                <div class="prog-track"><div class="prog-fill amber" style="width:75%"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><div class="card-title">Study Planner</div></div>
+          <div class="list-item"><div class="item-icon red">🔴</div><div class="item-body"><div class="item-title">SIA 102 – Architecture Diagram</div><div class="item-sub">Recommended: Start today · Due Apr 15</div></div></div>
+          <div class="list-item"><div class="item-icon amber">🟡</div><div class="item-body"><div class="item-title">WS 101 – Portfolio Website</div><div class="item-sub">Recommended: Start Apr 14 · Due Apr 17</div></div></div>
+          <div class="list-item"><div class="item-icon green">🟢</div><div class="item-body"><div class="item-title">CC 106 – Database Report</div><div class="item-sub">On track · Due Apr 20</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="app.js"></script>
+<script>
+function refreshInsights() {
+  toast('Refreshing AI insights…','info',1200);
+  setTimeout(()=>toast('Insights updated! Your GWA is on a positive trend.','success'),1300);
+}
+</script>
+</body>
+</html>

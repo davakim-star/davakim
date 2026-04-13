@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>EduTrack — Parent Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div id="app-root"></div>
+<script src="layout.js"></script>
+<script>
+buildLayout('parent');
+document.getElementById('page-main').innerHTML = `
+<div class="page-header">
+  <div class="header-left">
+    <h1>Welcome, Mrs. Dava! 👋</h1>
+    <p class="subtitle">Monitoring Kim Shanelle's academic progress.</p>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-primary" onclick="window.location.href='parentmessages.html'">💬 Message Teacher</button>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:20px;">
+  <div class="card-body" style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+    <div class="avatar avatar-xl avatar-red">KD</div>
+    <div style="flex:1;min-width:180px;">
+      <div style="font-family:'Poppins',sans-serif;font-size:20px;font-weight:700;">Kim Shanelle Dava</div>
+      <div style="font-size:13px;color:#6C757D;">3rd Year • BS Information Technology</div>
+      <div style="display:flex;gap:8px;margin-top:8px;">
+        <span class="badge badge-info">🏅 DEAN'S LISTER</span>
+        <span class="badge badge-success">92% ATTENDANCE</span>
+      </div>
+    </div>
+    <div style="display:flex;gap:32px;text-align:center;">
+      <div>
+        <div style="font-family:'Poppins',sans-serif;font-size:32px;font-weight:800;color:#8B1A1A;">1.25</div>
+        <div style="font-size:12px;color:#6C757D;font-weight:600;">CURRENT GWA</div>
+      </div>
+      <div>
+        <div style="font-family:'Poppins',sans-serif;font-size:32px;font-weight:800;color:#27AE60;">#1</div>
+        <div style="font-size:12px;color:#6C757D;font-weight:600;">CLASS RANK</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="two-col" style="margin-bottom:20px;">
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Academic Trend (GWA)</span>
+      <span class="badge badge-success">↗ Improving</span>
+    </div>
+    <div class="card-body">
+      <svg id="gwa-chart" style="width:100%;height:150px;" viewBox="0 0 600 150"></svg>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">School Alerts</span>
+      <button class="btn btn-sm btn-secondary" onclick="showToast('All alerts cleared','success')">Clear All</button>
+    </div>
+    <div class="card-body" style="padding:8px 16px;">
+      <ul class="notif-list">
+        <li class="notif-item">
+          <div class="notif-icon" style="background:#F3EFFE;">📝</div>
+          <div class="notif-content">
+            <div class="notif-title">New Grade Posted</div>
+            <div class="notif-desc">SIA 102 Midterm grade is now available.</div>
+          </div>
+          <span class="notif-time">2h ago</span>
+        </li>
+        <li class="notif-item">
+          <div class="notif-icon" style="background:#E8FAF0;">📅</div>
+          <div class="notif-content">
+            <div class="notif-title">Attendance Alert</div>
+            <div class="notif-desc">Kim was marked present in all classes today.</div>
+          </div>
+          <span class="notif-time">5h ago</span>
+        </li>
+        <li class="notif-item">
+          <div class="notif-icon" style="background:#FEF5E7;">🔔</div>
+          <div class="notif-content">
+            <div class="notif-title">Upcoming Event</div>
+            <div class="notif-desc">Parent-Teacher Conference on April 20.</div>
+          </div>
+          <span class="notif-time">1d ago</span>
+        </li>
+        <li class="notif-item">
+          <div class="notif-icon" style="background:#EBF5FB;">📚</div>
+          <div class="notif-content">
+            <div class="notif-title">Assignment Due</div>
+            <div class="notif-desc">Project Proposal for WS 101 due tomorrow.</div>
+          </div>
+          <span class="notif-time">2d ago</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <span class="card-title">Subject Performance</span>
+    <a href="parentgrades.html" style="font-size:12.5px;color:#8B1A1A;text-decoration:none;font-weight:600;">View Full Report →</a>
+  </div>
+  <div class="card-body">
+    <div class="three-col">
+      ${[
+        {code:'SIA 102',name:'Systems Integration',score:92,label:'EXCELLENT',color:'#27AE60'},
+        {code:'WS 101',name:'Web Systems',score:88,label:'GOOD',color:'#2980B9'},
+        {code:'CC 106',name:'App Development',score:87,label:'GOOD',color:'#8E44AD'},
+      ].map(s=>`
+      <div style="border:1px solid #F1F3F5;border-radius:12px;padding:18px;">
+        <div style="font-size:11px;font-weight:700;color:#8B1A1A;letter-spacing:0.5px;">${s.code}</div>
+        <div style="font-size:14px;font-weight:600;color:#343A40;margin:4px 0;">${s.name}</div>
+        <div style="font-family:'Poppins',sans-serif;font-size:36px;font-weight:800;color:${s.color};">${s.score}</div>
+        <div style="font-size:11px;font-weight:700;color:#6C757D;">${s.label}</div>
+        <div class="progress-bar-wrapper" style="margin-top:10px;"><div class="progress-bar" style="width:${s.score}%;background:${s.color};"></div></div>
+      </div>`).join('')}
+    </div>
+  </div>
+</div>
+`;
+
+// Draw GWA line chart (inverted since lower is better)
+setTimeout(() => {
+  const svg = document.getElementById('gwa-chart');
+  if (!svg) return;
+  const data = [1.5, 1.45, 1.38, 1.30, 1.25];
+  const labels = ['Jan','Feb','Mar','Apr','Now'];
+  const W = 560, H = 130;
+  const min = 1.0, max = 1.7;
+  const px = i => (i / (data.length-1)) * (W-40) + 20;
+  const py = v => 10 + ((v - min) / (max - min)) * (H - 30);
+  const points = data.map((v,i) => `${px(i)},${py(v)}`).join(' ');
+  svg.innerHTML = `
+    <defs><linearGradient id="gwag" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8B1A1A" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#8B1A1A" stop-opacity="0"/>
+    </linearGradient></defs>
+    <polygon points="${points} ${px(4)},${H} ${px(0)},${H}" fill="url(#gwag)"/>
+    <polyline points="${points}" fill="none" stroke="#8B1A1A" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+    ${data.map((v,i)=>`<circle cx="${px(i)}" cy="${py(v)}" r="4" fill="#8B1A1A" stroke="white" stroke-width="2"/>
+      <text x="${px(i)}" y="${H+2}" text-anchor="middle" font-size="11" fill="#ADB5BD" font-family="DM Sans">${labels[i]}</text>`).join('')}
+  `;
+}, 100);
+</script>
+<script src="app.js"></script>
+</body>
+</html>

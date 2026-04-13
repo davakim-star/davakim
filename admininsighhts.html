@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>EduTrack — Insights</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div id="app-root"></div>
+<script src="layout.js"></script>
+<script>
+buildLayout('admin');
+document.getElementById('page-main').innerHTML = `
+<div class="page-header">
+  <div class="header-left"><h1>📈 Insights</h1><p class="subtitle">System-wide analytics and performance metrics</p></div>
+  <div class="header-actions">
+    <select class="form-control form-select" style="max-width:180px;" onchange="showToast('Period updated','default')">
+      <option>Semester 1, 2025-2026</option><option>Semester 2, 2025-2026</option><option>All Time</option>
+    </select>
+    <button class="btn btn-primary" onclick="showToast('Report exported','success')">📤 Export</button>
+  </div>
+</div>
+
+<div class="stats-grid" style="margin-bottom:20px;">
+  <div class="stat-card"><div class="stat-icon green">📈</div><div class="stat-info"><div class="stat-label">Avg GWA (School)</div><div class="stat-value">1.87</div></div></div>
+  <div class="stat-card"><div class="stat-icon blue">📅</div><div class="stat-info"><div class="stat-label">Avg Attendance</div><div class="stat-value">91%</div></div></div>
+  <div class="stat-card"><div class="stat-icon orange">🏅</div><div class="stat-info"><div class="stat-label">Dean's Listers</div><div class="stat-value">342</div></div></div>
+  <div class="stat-card"><div class="stat-icon red">⚠️</div><div class="stat-info"><div class="stat-label">At-Risk Students</div><div class="stat-value">28</div></div></div>
+</div>
+
+<div class="two-col-equal" style="margin-bottom:20px;">
+  <div class="card">
+    <div class="card-header"><span class="card-title">Enrollment by Department</span></div>
+    <div class="card-body">
+      ${[
+        {dept:'Information Technology',count:680,pct:28,color:'#8B1A1A'},
+        {dept:'Computer Science',count:520,pct:21,color:'#C0392B'},
+        {dept:'Business Administration',count:450,pct:18,color:'#2980B9'},
+        {dept:'Engineering',count:380,pct:16,color:'#27AE60'},
+        {dept:'Education',count:220,pct:9,color:'#E67E22'},
+        {dept:'Others',count:200,pct:8,color:'#ADB5BD'},
+      ].map(d=>`
+      <div style="margin-bottom:14px;">
+        <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px;">
+          <span style="font-weight:600;">${d.dept}</span>
+          <span style="color:#6C757D;">${d.count} students (${d.pct}%)</span>
+        </div>
+        <div class="progress-bar-wrapper"><div class="progress-bar" style="width:${d.pct*3}%;background:${d.color};max-width:100%;"></div></div>
+      </div>`).join('')}
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="card-title">Top Performing Classes</span></div>
+    <div class="card-body" style="padding:0;">
+      <table class="data-table">
+        <thead><tr><th>#</th><th>Class</th><th>Faculty</th><th>Avg Grade</th><th>Trend</th></tr></thead>
+        <tbody>
+          ${[
+            [1,'CC 106','Laudato, M.','1.42','↑'],
+            [2,'SIA 102','Laudato, M.','1.58','↑'],
+            [3,'WS 101','Laudato, M.','1.67','→'],
+            [4,'IT 301','Santos, J.','1.72','↑'],
+            [5,'CS 210','Reyes, A.','1.80','↓'],
+          ].map(([rank,cls,fac,grade,trend])=>`
+          <tr>
+            <td><strong style="color:${rank<=3?'#8B1A1A':'#ADB5BD'};">#${rank}</strong></td>
+            <td><strong>${cls}</strong></td>
+            <td>${fac}</td>
+            <td><span style="font-family:'Poppins',sans-serif;font-weight:700;">${grade}</span></td>
+            <td style="color:${trend==='↑'?'#27AE60':trend==='↓'?'#C0392B':'#ADB5BD'};font-size:18px;">${trend}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="two-col-equal">
+  <div class="card">
+    <div class="card-header"><span class="card-title">Monthly Attendance Trend</span></div>
+    <div class="card-body">
+      <div class="bar-chart" style="height:160px;">
+        ${[['Aug',88],['Sep',91],['Oct',93],['Nov',90],['Dec',85],['Jan',92],['Feb',94],['Mar',91]].map(([m,v])=>`
+        <div class="bar-item">
+          <div class="bar-val">${v}%</div>
+          <div class="bar" style="height:${v}%;background:${v>=92?'#27AE60':'#8B1A1A'};"></div>
+          <div class="bar-label">${m}</div>
+        </div>`).join('')}
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="card-title">Student Status Breakdown</span></div>
+    <div class="card-body">
+      ${[
+        {label:"Dean's Listers",count:342,pct:14,color:'#2980B9'},
+        {label:'Regular Students',count:1850,pct:76,color:'#27AE60'},
+        {label:'Academic Probation',count:180,pct:7,color:'#E67E22'},
+        {label:'At-Risk',count:78,pct:3,color:'#C0392B'},
+      ].map(s=>`
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #F1F3F5;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:12px;height:12px;border-radius:3px;background:${s.color};flex-shrink:0;"></div>
+          <span style="font-size:13.5px;font-weight:600;">${s.label}</span>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-weight:700;font-size:16px;">${s.count}</div>
+          <div style="font-size:11px;color:#ADB5BD;">${s.pct}%</div>
+        </div>
+      </div>`).join('')}
+    </div>
+  </div>
+</div>
+`;
+</script>
+<script src="app.js"></script>
+</body>
+</html>

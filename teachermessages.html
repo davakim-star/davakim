@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>EduTrack — Messages</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div id="app-root"></div>
+<script src="layout.js"></script>
+<script>
+buildLayout('teacher');
+document.getElementById('page-main').innerHTML = `
+<div class="page-header">
+  <div class="header-left">
+    <h1>💬 Messages</h1>
+    <p class="subtitle">Communicate with students and parents</p>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-primary" onclick="openModal('modal-new-msg')">✏️ New Message</button>
+  </div>
+</div>
+
+<div class="card messages-layout">
+  <div class="msg-list">
+    <div style="padding:12px 16px;border-bottom:1px solid #F1F3F5;">
+      <div style="position:relative;">
+        <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:13px;color:#ADB5BD;">🔍</span>
+        <input type="text" class="form-control" placeholder="Search messages..." style="padding-left:32px;">
+      </div>
+    </div>
+    ${[
+      {init:'RD',col:'avatar-green',name:'Ritchell Dava',role:'Parent',msg:'Good morning Ma\'am, how is Kim doing?',time:'10:32 AM',unread:2},
+      {init:'KD',col:'avatar-red',name:'Kim Shanelle Dava',role:'Student',msg:'Ma\'am I submitted my project already.',time:'9:15 AM',unread:0},
+      {init:'JS',col:'avatar-blue',name:'John Smith',role:'Student',msg:'Can I ask about Quiz 2 results?',time:'Yesterday',unread:1},
+      {init:'AU',col:'avatar-purple',name:'Admin User',role:'Admin',msg:'Please submit your grades by Friday.',time:'Yesterday',unread:0},
+      {init:'AW',col:'avatar-teal',name:'Alice Wong',role:'Student',msg:'Thank you for the feedback Ma\'am!',time:'Mon',unread:0},
+    ].map((m,i)=>`
+    <div class="msg-item ${i===0?'active':''}" onclick="selectThread('${m.name}','${m.init}','${m.col}')">
+      <div class="avatar avatar-sm ${m.col}">${m.init}</div>
+      <div class="msg-item-info">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span class="msg-item-name">${m.name}</span>
+          <span class="msg-item-time">${m.time}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span class="msg-item-preview">${m.msg}</span>
+          ${m.unread?`<span class="msg-unread">${m.unread}</span>`:''}
+        </div>
+      </div>
+    </div>`).join('')}
+  </div>
+
+  <div class="msg-thread">
+    <div class="thread-header">
+      <div class="avatar avatar-sm avatar-green">RD</div>
+      <div>
+        <div style="font-weight:700;font-size:14px;" id="thread-contact-name">Ritchell Dava</div>
+        <div style="font-size:12px;color:#ADB5BD;">Parent of Kim Shanelle Dava</div>
+      </div>
+      <div style="margin-left:auto;display:flex;gap:8px;">
+        <button class="btn btn-sm btn-secondary" onclick="showToast('Calling...','default')">📞</button>
+        <button class="btn btn-sm btn-secondary" onclick="showToast('Info','default')">ℹ️</button>
+      </div>
+    </div>
+    <div class="thread-body" id="thread-body">
+      <div class="bubble recv">
+        <div class="bubble-content">Good morning Ma'am Laudato! I just wanted to ask how Kim is performing in class.</div>
+        <div class="bubble-time">10:28 AM</div>
+      </div>
+      <div class="bubble sent">
+        <div class="bubble-content">Good morning Mrs. Dava! Kim is doing really well. She's currently at the top of the class with a 1.25 GWA. 🎉</div>
+        <div class="bubble-time">10:30 AM</div>
+      </div>
+      <div class="bubble recv">
+        <div class="bubble-content">That's wonderful to hear! Thank you so much Ma'am. We're very proud of her.</div>
+        <div class="bubble-time">10:31 AM</div>
+      </div>
+      <div class="bubble recv">
+        <div class="bubble-content">Good morning Ma'am, how is Kim doing in the upcoming project submission?</div>
+        <div class="bubble-time">10:32 AM</div>
+      </div>
+    </div>
+    <div class="thread-footer">
+      <textarea id="msg-input" placeholder="Type a message... (Enter to send)"></textarea>
+      <button class="btn btn-primary" onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+</div>
+`;
+
+function selectThread(name, init, col) {
+  document.querySelectorAll('.msg-item').forEach(x => x.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  document.getElementById('thread-contact-name').textContent = name;
+}
+
+document.body.insertAdjacentHTML('beforeend', `
+<div class="modal-overlay" id="modal-new-msg">
+  <div class="modal">
+    <div class="modal-header"><span class="modal-title">New Message</span><button class="modal-close">✕</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">To</label>
+        <select class="form-control form-select">
+          <option>Kim Shanelle Dava (Student)</option>
+          <option>Ritchell Dava (Parent)</option>
+          <option>John Smith (Student)</option>
+          <option>All Students — SIA 102</option>
+          <option>Admin User</option>
+        </select></div>
+      <div class="form-group"><label class="form-label">Subject</label><input class="form-control" placeholder="Message subject"></div>
+      <div class="form-group"><label class="form-label">Message</label><textarea class="form-control" rows="5" placeholder="Write your message..."></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-new-msg')">Cancel</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-new-msg');showToast('Message sent!','success')">Send Message</button>
+    </div>
+  </div>
+</div>
+`);
+</script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>EduTrack — Grades (Parent)</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div id="app-root"></div>
+<script src="layout.js"></script>
+<script>
+buildLayout('parent');
+document.getElementById('page-main').innerHTML = `
+<div class="page-header">
+  <div class="header-left"><h1>📊 Grades</h1><p class="subtitle">Kim Shanelle Dava — Academic Performance</p></div>
+  <div class="header-actions">
+    <button class="btn btn-secondary" onclick="showToast('Report downloaded','success')">📥 Download Report</button>
+    <button class="btn btn-primary" onclick="window.location.href='parentmessages.html'">💬 Message Teacher</button>
+  </div>
+</div>
+
+<div class="stats-grid" style="margin-bottom:20px;">
+  <div class="stat-card"><div class="stat-icon red">🎓</div><div class="stat-info"><div class="stat-label">Current GWA</div><div class="stat-value">1.25</div></div></div>
+  <div class="stat-card"><div class="stat-icon green">🏅</div><div class="stat-info"><div class="stat-label">Class Rank</div><div class="stat-value">#1</div></div></div>
+  <div class="stat-card"><div class="stat-icon blue">📚</div><div class="stat-info"><div class="stat-label">Subjects</div><div class="stat-value">3</div></div></div>
+  <div class="stat-card"><div class="stat-icon orange">⭐</div><div class="stat-info"><div class="stat-label">Honor Status</div><div class="stat-value" style="font-size:14px;font-weight:700;color:#27AE60;">Dean's Lister</div></div></div>
+</div>
+
+<div class="tabs" data-tabs>
+  <button class="tab active" data-tab="sia">SIA 102</button>
+  <button class="tab" data-tab="ws">WS 101</button>
+  <button class="tab" data-tab="cc">CC 106</button>
+</div>
+
+<div class="tab-panel active" data-panel="sia">
+  <div class="two-col">
+    <div class="card">
+      <div class="card-header"><span class="card-title">SIA 102 — Systems Integration</span><span class="badge badge-success">PASSED</span></div>
+      <div class="card-body">
+        <table class="data-table">
+          <thead><tr><th>Assessment</th><th>Score</th><th>Total</th><th>Percentage</th><th>Grade</th></tr></thead>
+          <tbody>
+            ${[
+              ['Quiz 1',92,100,'92%','A'],
+              ['Quiz 2',95,100,'95%','A+'],
+              ['Activity 1',88,100,'88%','A-'],
+              ['Midterm Exam',90,100,'90%','A'],
+              ['Project',96,100,'96%','A+'],
+              ['Finals',94,100,'94%','A+'],
+            ].map(([name,s,t,pct,grade])=>`
+            <tr>
+              <td>${name}</td>
+              <td><strong>${s}</strong></td>
+              <td>${t}</td>
+              <td>
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <div class="progress-bar-wrapper" style="width:80px;"><div class="progress-bar" style="width:${pct};background:#27AE60;"></div></div>
+                  <span>${pct}</span>
+                </div>
+              </td>
+              <td><span class="badge badge-success">${grade}</span></td>
+            </tr>`).join('')}
+          </tbody>
+          <tfoot>
+            <tr style="background:#F9F0F0;">
+              <td style="font-weight:700;">Final Grade</td>
+              <td colspan="3" style="font-weight:700;">Weighted Average: 92.5%</td>
+              <td><span style="font-family:'Poppins',sans-serif;font-size:18px;font-weight:800;color:#8B1A1A;">1.25</span></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:16px;">
+        <div class="card-header"><span class="card-title">Performance Chart</span></div>
+        <div class="card-body">
+          <div class="bar-chart" style="height:160px;">
+            ${[['Q1',92],['Q2',95],['Act',88],['Mid',90],['Proj',96],['Final',94]].map(([l,v])=>`
+            <div class="bar-item">
+              <div class="bar-val">${v}</div>
+              <div class="bar" style="height:${v}%;"></div>
+              <div class="bar-label">${l}</div>
+            </div>`).join('')}
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span class="card-title">Teacher's Remarks</span></div>
+        <div class="card-body">
+          <div style="background:#F9F0F0;border-left:3px solid #8B1A1A;padding:14px;border-radius:0 8px 8px 0;font-size:13.5px;color:#495057;line-height:1.6;">
+            "Kim is consistently outstanding. She shows great initiative and attention to detail. She's one of the top students in the class and I highly recommend her for academic honors."
+          </div>
+          <div style="font-size:12px;color:#ADB5BD;margin-top:8px;">— Mrs. Maydelyn Joy Laudato, April 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tab-panel" data-panel="ws">
+  <div class="card">
+    <div class="card-header"><span class="card-title">WS 101 — Web Systems</span><span class="badge badge-success">PASSED</span></div>
+    <div class="card-body">
+      <table class="data-table">
+        <thead><tr><th>Assessment</th><th>Score</th><th>Total</th><th>Percentage</th><th>Grade</th></tr></thead>
+        <tbody>
+          ${[['Quiz 1',88,100,'88%','A-'],['Quiz 2',86,100,'86%','B+'],['Midterm',87,100,'87%','A-'],['Finals',89,100,'89%','A-'],['Project',90,100,'90%','A']]
+            .map(([n,s,t,p,g])=>`<tr><td>${n}</td><td><strong>${s}</strong></td><td>${t}</td><td>${p}</td><td><span class="badge badge-success">${g}</span></td></tr>`).join('')}
+        </tbody>
+        <tfoot>
+          <tr style="background:#F9F0F0;"><td style="font-weight:700;">Final Grade</td><td colspan="3" style="font-weight:700;">88.0%</td><td><span style="font-family:'Poppins',sans-serif;font-size:18px;font-weight:800;color:#8B1A1A;">1.50</span></td></tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="tab-panel" data-panel="cc">
+  <div class="card">
+    <div class="card-header"><span class="card-title">CC 106 — App Development</span><span class="badge badge-success">PASSED</span></div>
+    <div class="card-body">
+      <table class="data-table">
+        <thead><tr><th>Assessment</th><th>Score</th><th>Total</th><th>Percentage</th><th>Grade</th></tr></thead>
+        <tbody>
+          ${[['Quiz 1',85,100,'85%','B+'],['Quiz 2',87,100,'87%','A-'],['Midterm',84,100,'84%','B+'],['Finals',88,100,'88%','A-'],['Project',92,100,'92%','A']]
+            .map(([n,s,t,p,g])=>`<tr><td>${n}</td><td><strong>${s}</strong></td><td>${t}</td><td>${p}</td><td><span class="badge badge-success">${g}</span></td></tr>`).join('')}
+        </tbody>
+        <tfoot>
+          <tr style="background:#F9F0F0;"><td style="font-weight:700;">Final Grade</td><td colspan="3" style="font-weight:700;">87.2%</td><td><span style="font-family:'Poppins',sans-serif;font-size:18px;font-weight:800;color:#8B1A1A;">1.75</span></td></tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+`;
+</script>
+<script src="app.js"></script>
+</body>
+</html>

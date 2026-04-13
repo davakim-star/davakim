@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>EduTrack — Admin Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div id="app-root"></div>
+<script src="layout.js"></script>
+<script>
+buildLayout('admin');
+document.getElementById('page-main').innerHTML = `
+<div class="page-header">
+  <div class="header-left">
+    <h1>System Overview 🛡️</h1>
+    <p class="subtitle">EduTrack Administration &amp; Insights Panel.</p>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-secondary" onclick="showToast('Opening system logs...','default')">📋 System Logs</button>
+    <button class="btn btn-primary" onclick="openModal('modal-report')">📊 Generate Report</button>
+  </div>
+</div>
+
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-icon blue">👥</div>
+    <div class="stat-info">
+      <div class="stat-label">Total Users</div>
+      <div class="stat-value">2,450</div>
+      <span class="stat-badge up">+12%</span>
+    </div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon green">🎓</div>
+    <div class="stat-info">
+      <div class="stat-label">Total Faculty</div>
+      <div class="stat-value">185</div>
+      <span class="stat-badge up">+5%</span>
+    </div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon purple">🏛️</div>
+    <div class="stat-info">
+      <div class="stat-label">Departments</div>
+      <div class="stat-value">12</div>
+      <span class="stat-badge stable">Stable</span>
+    </div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon orange">⚡</div>
+    <div class="stat-info">
+      <div class="stat-label">System Health</div>
+      <div class="stat-value">99.9%</div>
+      <span class="stat-badge stable">Stable</span>
+    </div>
+  </div>
+</div>
+
+<div class="two-col" style="margin-bottom:20px;">
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Enrollment Growth</span>
+      <select class="form-control form-select" style="max-width:140px;" onchange="showToast('Period changed','default')">
+        <option>Last 5 Years</option><option>Last 3 Years</option><option>This Year</option>
+      </select>
+    </div>
+    <div class="card-body">
+      <div class="bar-chart" style="height:200px;">
+        ${[['2022',1100],['2023',1450],['2024',1650],['2025',1900],['2026',2150]].map(([yr,val])=>`
+        <div class="bar-item">
+          <div class="bar-val">${val}</div>
+          <div class="bar" style="height:${Math.round(val/2200*100)}%;"></div>
+          <div class="bar-label">${yr}</div>
+        </div>`).join('')}
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Live Activity 📡</span>
+      <span style="font-size:11px;color:#27AE60;font-weight:600;">● REAL-TIME</span>
+    </div>
+    <div class="card-body">
+      <svg id="live-chart" style="width:100%;height:120px;" viewBox="0 0 300 120"></svg>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:14px;">
+        <div style="background:#FEF5E7;border-left:3px solid #E67E22;padding:10px 14px;border-radius:0 8px 8px 0;">
+          <div style="font-size:13px;font-weight:700;color:#E67E22;">⚠️ Server Load High</div>
+          <div style="font-size:12px;color:#6C757D;">Peak usage detected at 12:45 PM</div>
+        </div>
+        <div style="background:#EBF5FB;border-left:3px solid #2980B9;padding:10px 14px;border-radius:0 8px 8px 0;">
+          <div style="font-size:13px;font-weight:700;color:#2980B9;">↗ New Registrations</div>
+          <div style="font-size:12px;color:#6C757D;">45 new students joined today</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <span class="card-title">System Events</span>
+    <a href="adminreports.html" style="font-size:12.5px;color:#8B1A1A;text-decoration:none;font-weight:600;">View Audit Log →</a>
+  </div>
+  <div class="card-body" style="padding:0;">
+    <table class="data-table">
+      <thead><tr><th>Event</th><th>Type</th><th>Time</th><th>Status</th></tr></thead>
+      <tbody>
+        ${[
+          ['Database Backup','System','2 mins ago','SUCCESS'],
+          ['User Login: Mrs. Laudato','Auth','5 mins ago','SUCCESS'],
+          ['Grade Submission: SIA 102','Academic','10 mins ago','SUCCESS'],
+          ['Failed Login Attempt','Security','15 mins ago','WARNING'],
+          ['New User Registration','User','1 hour ago','SUCCESS'],
+          ['System Update Applied','Maintenance','2 hours ago','SUCCESS'],
+        ].map(([ev,type,time,status])=>`
+        <tr>
+          <td>🔹 ${ev}</td>
+          <td><span class="badge badge-gray">${type}</span></td>
+          <td style="color:#ADB5BD;">${time}</td>
+          <td><span class="badge ${status==='SUCCESS'?'badge-success':status==='WARNING'?'badge-warning':'badge-danger'}">${status}</span></td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+  </div>
+</div>
+`;
+
+setTimeout(() => {
+  const svg = document.getElementById('live-chart');
+  if (!svg) return;
+  const data = [30,55,80,110,140,120,90,75,85,100,95,80,65];
+  const W = 300, H = 110;
+  const max = Math.max(...data), min = Math.min(...data);
+  const px = i => (i / (data.length-1)) * W;
+  const py = v => 10 + (1 - (v-min)/(max-min)) * (H-20);
+  const pts = data.map((v,i)=>`${px(i)},${py(v)}`).join(' ');
+  svg.innerHTML = `
+    <defs><linearGradient id="liveg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8B1A1A" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#8B1A1A" stop-opacity="0"/>
+    </linearGradient></defs>
+    <polygon points="${pts} ${W},${H} 0,${H}" fill="url(#liveg)"/>
+    <polyline points="${pts}" fill="none" stroke="#8B1A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  `;
+}, 100);
+
+document.body.insertAdjacentHTML('beforeend', `
+<div class="modal-overlay" id="modal-report">
+  <div class="modal">
+    <div class="modal-header"><span class="modal-title">Generate Report</span><button class="modal-close">✕</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Report Type</label>
+        <select class="form-control form-select">
+          <option>Enrollment Summary</option><option>Faculty Report</option><option>Attendance Overview</option><option>Academic Performance</option><option>System Usage</option>
+        </select></div>
+      <div class="form-group"><label class="form-label">Period</label>
+        <select class="form-control form-select"><option>Current Semester</option><option>Last Semester</option><option>Academic Year 2025-2026</option></select></div>
+      <div class="form-group"><label class="form-label">Format</label>
+        <select class="form-control form-select"><option>PDF</option><option>Excel (.xlsx)</option><option>CSV</option></select></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-report')">Cancel</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-report');showToast('Report generating...','default');setTimeout(()=>showToast('Report ready! Downloading...','success'),2000)">Generate</button>
+    </div>
+  </div>
+</div>
+`);
+</script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>EduTrack — Class Management</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div id="app-root"></div>
+<script src="layout.js"></script>
+<script>
+buildLayout('teacher');
+document.getElementById('page-main').innerHTML = `
+<div class="page-header">
+  <div class="header-left">
+    <h1>🏫 Class Management</h1>
+    <p class="subtitle">Manage your classes and enrolled students</p>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-secondary" onclick="openModal('modal-add-student')">👤 Add Student</button>
+    <button class="btn btn-primary" onclick="openModal('modal-add-class')">+ New Class</button>
+  </div>
+</div>
+
+<div class="class-cards" style="margin-bottom:24px;">
+  ${[
+    {code:'SIA 102',name:'Systems Integration',icon:'📚',room:'Lab 402',time:'08:00 AM – 10:00 AM',students:32,section:'BSIT-3A'},
+    {code:'WS 101',name:'Web Systems',icon:'🌐',room:'Room 305',time:'10:30 AM – 12:30 PM',students:28,section:'BSIT-3B'},
+    {code:'CC 106',name:'App Development',icon:'💻',room:'Lab 405',time:'01:30 PM – 03:30 PM',students:30,section:'BSIT-3C'},
+  ].map(c=>`
+  <div class="class-card">
+    <div class="class-card-top">
+      <div class="class-card-icon">${c.icon}</div>
+      <div style="display:flex;gap:6px;">
+        <span class="class-card-code">${c.code}</span>
+        <div class="dropdown">
+          <button class="btn btn-sm" style="padding:2px 8px;background:none;border:1px solid #DEE2E6;border-radius:4px;" data-dropdown="dd-${c.code.replace(' ','')}">⋯</button>
+          <div class="dropdown-menu" id="dd-${c.code.replace(' ','')}">
+            <div class="dropdown-item" onclick="showToast('Editing ${c.name}','default')">✏️ Edit</div>
+            <div class="dropdown-item" onclick="showToast('Viewing roster','default')">👥 View Roster</div>
+            <div class="dropdown-item" onclick="showToast('Report generated','success')">📋 Generate Report</div>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item" style="color:#C0392B;" onclick="confirmDelete('Delete class ${c.name}?',()=>showToast('Class deleted','error'))">🗑️ Delete</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="class-card-title">${c.name}</div>
+    <div class="class-card-meta">Section: ${c.section}</div>
+    <div style="margin-top:10px;">
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:#6C757D;margin-bottom:4px;"><span>Enrollment</span><span>${c.students}/40</span></div>
+      <div class="progress-bar-wrapper"><div class="progress-bar" style="width:${Math.round(c.students/40*100)}%"></div></div>
+    </div>
+    <div class="class-card-footer">
+      <span>⏰ ${c.time}</span>
+      <span>📍 ${c.room}</span>
+    </div>
+  </div>`).join('')}
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <span class="card-title">Student Roster — SIA 102</span>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <div style="position:relative;">
+        <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#ADB5BD;">🔍</span>
+        <input id="search-students" type="text" class="form-control" placeholder="Search..." style="padding-left:32px;max-width:200px;">
+      </div>
+      <select class="form-control form-select" style="max-width:180px;" onchange="showToast('Class changed','default')">
+        <option>SIA 102</option><option>WS 101</option><option>CC 106</option>
+      </select>
+    </div>
+  </div>
+  <div style="overflow-x:auto;">
+    <table class="data-table" id="students-table">
+      <thead><tr><th>#</th><th>Student</th><th>Student ID</th><th>Year & Section</th><th>Attendance</th><th>Grade</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody>
+        ${[
+          ['Kim Shanelle Dava','KD','avatar-red','2024-0001','3rd Yr • BSIT-3A','96%','1.25','DEAN\'S LISTER'],
+          ['John Smith','JS','avatar-blue','2024-0002','3rd Yr • BSIT-3A','88%','2.00','REGULAR'],
+          ['Alice Wong','AW','avatar-purple','2024-0003','3rd Yr • BSIT-3A','92%','1.50','DEAN\'S LISTER'],
+          ['Bob Miller','BM','avatar-teal','2024-0004','3rd Yr • BSIT-3A','80%','2.50','REGULAR'],
+          ['Clara Reyes','CR','avatar-orange','2024-0005','3rd Yr • BSIT-3A','98%','1.00','DEAN\'S LISTER'],
+          ['David Cruz','DC','avatar-green','2024-0006','3rd Yr • BSIT-3A','75%','3.00','REGULAR'],
+          ['Emma Tan','ET','avatar-red','2024-0007','3rd Yr • BSIT-3A','60%','5.00','AT RISK'],
+        ].map(([name,init,col,id,yr,att,grade,status],i)=>`
+        <tr>
+          <td style="color:#ADB5BD;">${i+1}</td>
+          <td><div style="display:flex;align-items:center;gap:10px;"><div class="avatar avatar-sm ${col}">${init}</div><span style="font-weight:600;">${name}</span></div></td>
+          <td style="font-family:monospace;">${id}</td>
+          <td>${yr}</td>
+          <td><span class="badge ${parseInt(att)>=85?'badge-success':parseInt(att)>=75?'badge-warning':'badge-danger'}">${att}</span></td>
+          <td><strong>${grade}</strong></td>
+          <td><span class="badge ${status==='DEAN\'S LISTER'?'badge-info':status==='AT RISK'?'badge-danger':'badge-gray'}">${status}</span></td>
+          <td style="display:flex;gap:6px;">
+            <button class="btn btn-sm btn-secondary" onclick="viewStudent('${name}')">👁</button>
+            <button class="btn btn-sm btn-secondary" onclick="msgStudent('${name}')">💬</button>
+            <button class="btn btn-sm btn-danger" onclick="confirmDelete('Remove ${name} from class?',()=>showToast('Student removed','error'))">🗑</button>
+          </td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+  </div>
+</div>
+`;
+
+function viewStudent(name) { showToast('Viewing profile: '+name,'default'); }
+function msgStudent(name) { window.location.href = 'teachermessages.html'; }
+
+document.body.insertAdjacentHTML('beforeend', `
+<div class="modal-overlay" id="modal-add-class">
+  <div class="modal">
+    <div class="modal-header"><span class="modal-title">New Class</span><button class="modal-close">✕</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Class Code</label><input class="form-control" placeholder="e.g. SIA 102"></div>
+      <div class="form-group"><label class="form-label">Class Name</label><input class="form-control" placeholder="e.g. Systems Integration"></div>
+      <div class="form-group"><label class="form-label">Section</label><input class="form-control" placeholder="e.g. BSIT-3A"></div>
+      <div class="two-col-equal">
+        <div class="form-group"><label class="form-label">Room</label><input class="form-control" placeholder="e.g. Lab 402"></div>
+        <div class="form-group"><label class="form-label">Schedule</label><input class="form-control" placeholder="e.g. MWF 8-10AM"></div>
+      </div>
+      <div class="form-group"><label class="form-label">Max Students</label><input type="number" class="form-control" value="40"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-add-class')">Cancel</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-add-class');showToast('Class created!','success')">Create Class</button>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-add-student">
+  <div class="modal">
+    <div class="modal-header"><span class="modal-title">Add Student to Class</span><button class="modal-close">✕</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Select Class</label>
+        <select class="form-control form-select"><option>SIA 102</option><option>WS 101</option><option>CC 106</option></select></div>
+      <div class="form-group"><label class="form-label">Student ID</label><input class="form-control" placeholder="Enter Student ID"></div>
+      <div class="form-group"><label class="form-label">Full Name</label><input class="form-control" placeholder="Full name"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-add-student')">Cancel</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-add-student');showToast('Student added!','success')">Add Student</button>
+    </div>
+  </div>
+</div>
+`);
+</script>
+<script src="app.js"></script>
+</body>
+</html>

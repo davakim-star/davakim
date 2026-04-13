@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>EduTrack — Attendance (Parent)</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div id="app-root"></div>
+<script src="layout.js"></script>
+<script>
+buildLayout('parent');
+document.getElementById('page-main').innerHTML = `
+<div class="page-header">
+  <div class="header-left"><h1>📅 Attendance</h1><p class="subtitle">Kim Shanelle Dava — Attendance Records</p></div>
+  <div class="header-actions">
+    <button class="btn btn-secondary" onclick="showToast('Downloading report...','default')">📥 Download</button>
+  </div>
+</div>
+
+<div class="stats-grid" style="margin-bottom:20px;">
+  <div class="stat-card"><div class="stat-icon green">✅</div><div class="stat-info"><div class="stat-label">Total Present</div><div class="stat-value">68</div></div></div>
+  <div class="stat-card"><div class="stat-icon red">❌</div><div class="stat-info"><div class="stat-label">Total Absent</div><div class="stat-value">4</div></div></div>
+  <div class="stat-card"><div class="stat-icon orange">⏰</div><div class="stat-info"><div class="stat-label">Total Late</div><div class="stat-value">2</div></div></div>
+  <div class="stat-card"><div class="stat-icon blue">📊</div><div class="stat-info"><div class="stat-label">Attendance Rate</div><div class="stat-value">92%</div></div></div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <div class="card-header"><span class="card-title">Monthly Attendance Summary</span>
+      <select class="form-control form-select" style="max-width:160px;" onchange="showToast('Month changed','default')">
+        <option>April 2026</option><option>March 2026</option><option>February 2026</option>
+      </select>
+    </div>
+    <div class="card-body">
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center;">
+        ${['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(d=>`<div style="font-size:11px;font-weight:700;color:#ADB5BD;padding:4px;">${d}</div>`).join('')}
+        ${Array.from({length:3}).map(()=>`<div></div>`).join('')}
+        ${Array.from({length:30},(_,i)=>{
+          const day = i+1;
+          const isWeekend = (i+3)%7 >= 5;
+          if(isWeekend) return `<div style="padding:6px;font-size:12px;color:#CED4DA;">${day}</div>`;
+          const status = [2,9,16].includes(day) ? 'absent' : [5,12].includes(day) ? 'late' : 'present';
+          const colors = {present:'#E8FAF0',absent:'#FDECEA',late:'#FEF9EC'};
+          const tc = {present:'#1E8449',absent:'#C0392B',late:'#B7770D'};
+          return `<div style="padding:6px;background:${colors[status]};border-radius:6px;font-size:12px;font-weight:600;color:${tc[status]};cursor:pointer;" title="${status}">${day}</div>`;
+        }).join('')}
+      </div>
+      <div style="display:flex;gap:16px;margin-top:16px;font-size:12px;">
+        <span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#E8FAF0;border:1px solid #A9DFBF;border-radius:3px;display:inline-block;"></span>Present</span>
+        <span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#FDECEA;border:1px solid #F1948A;border-radius:3px;display:inline-block;"></span>Absent</span>
+        <span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#FEF9EC;border:1px solid #F9E79F;border-radius:3px;display:inline-block;"></span>Late</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="card-title">Per-Subject Attendance</span></div>
+    <div class="card-body">
+      ${[
+        {code:'SIA 102',name:'Systems Integration',present:22,total:24,rate:92},
+        {code:'WS 101',name:'Web Systems',present:23,total:24,rate:96},
+        {code:'CC 106',name:'App Development',present:21,total:24,rate:88},
+      ].map(s=>`
+      <div style="padding:14px 0;border-bottom:1px solid #F1F3F5;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <div>
+            <div style="font-size:11px;font-weight:700;color:#8B1A1A;">${s.code}</div>
+            <div style="font-size:13.5px;font-weight:600;">${s.name}</div>
+          </div>
+          <span class="badge badge-success">${s.rate}%</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;color:#6C757D;margin-bottom:4px;">
+          <span>${s.present} present / ${s.total} sessions</span>
+          <span>${s.total - s.present} absent</span>
+        </div>
+        <div class="progress-bar-wrapper"><div class="progress-bar green" style="width:${s.rate}%"></div></div>
+      </div>`).join('')}
+    </div>
+  </div>
+</div>
+`;
+</script>
+<script src="app.js"></script>
+</body>
+</html>

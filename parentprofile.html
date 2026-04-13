@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>EduTrack — Profile (Parent)</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div id="app-root"></div>
+<script src="layout.js"></script>
+<script>
+buildLayout('parent');
+document.getElementById('page-main').innerHTML = `
+<div class="page-header">
+  <div class="header-left"><h1>👤 My Profile</h1><p class="subtitle">Manage your parent account</p></div>
+  <div class="header-actions">
+    <button class="btn btn-primary" onclick="saveProfile()">💾 Save Changes</button>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:20px;overflow:visible;">
+  <div class="profile-banner"></div>
+  <div class="profile-info-section">
+    <div class="avatar avatar-xl avatar-green" style="border:4px solid white;box-shadow:0 4px 16px rgba(0,0,0,0.1);">RD</div>
+    <div style="padding-bottom:4px;">
+      <div style="font-family:'Poppins',sans-serif;font-size:20px;font-weight:700;">Ritchell Dava</div>
+      <div style="font-size:13px;color:#6C757D;">Parent / Guardian of Kim Shanelle Dava</div>
+      <div style="display:flex;gap:8px;margin-top:8px;">
+        <span class="badge badge-info">👨‍👩‍👧 Parent</span>
+        <span class="badge badge-success">✅ Active</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="two-col-equal">
+  <div class="card">
+    <div class="card-header"><span class="card-title">Personal Information</span></div>
+    <div class="card-body">
+      <div class="form-group"><label class="form-label">Full Name</label><input class="form-control" value="Ritchell Dava"></div>
+      <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-control" value="rdava@gmail.com"></div>
+      <div class="form-group"><label class="form-label">Phone</label><input type="tel" class="form-control" value="+63 917 123 4567"></div>
+      <div class="form-group"><label class="form-label">Relationship to Student</label>
+        <select class="form-control form-select"><option>Mother</option><option>Father</option><option>Guardian</option></select></div>
+      <div class="form-group"><label class="form-label">Address</label><textarea class="form-control" rows="2">123 Rizal St., Iloilo City</textarea></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-header"><span class="card-title">Linked Student</span></div>
+      <div class="card-body">
+        <div style="display:flex;align-items:center;gap:14px;padding:12px;background:#F9F0F0;border-radius:10px;">
+          <div class="avatar avatar-red">KD</div>
+          <div>
+            <div style="font-weight:700;">Kim Shanelle Dava</div>
+            <div style="font-size:12px;color:#6C757D;">3rd Year • BS Information Technology</div>
+            <div style="font-size:12px;color:#6C757D;">ID: 2024-0001</div>
+          </div>
+          <div style="margin-left:auto;">
+            <span class="badge badge-success">Active</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span class="card-title">Change Password</span></div>
+      <div class="card-body">
+        <div class="form-group"><label class="form-label">Current Password</label><input type="password" class="form-control" placeholder="••••••••"></div>
+        <div class="form-group"><label class="form-label">New Password</label><input type="password" class="form-control" placeholder="••••••••"></div>
+        <div class="form-group"><label class="form-label">Confirm Password</label><input type="password" class="form-control" placeholder="••••••••"></div>
+        <button class="btn btn-primary" style="width:100%;" onclick="showToast('Password updated!','success')">Update Password</button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+function saveProfile() { showToast('Profile saved!','success'); }
+</script>
+<script src="app.js"></script>
+</body>
+</html>

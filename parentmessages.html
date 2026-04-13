@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>EduTrack — Messages (Parent)</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div id="app-root"></div>
+<script src="layout.js"></script>
+<script>
+buildLayout('parent');
+document.getElementById('page-main').innerHTML = `
+<div class="page-header">
+  <div class="header-left"><h1>💬 Messages</h1><p class="subtitle">Communicate with teachers and the school</p></div>
+  <div class="header-actions">
+    <button class="btn btn-primary" onclick="openModal('modal-new-msg')">✏️ New Message</button>
+  </div>
+</div>
+
+<div class="card messages-layout">
+  <div class="msg-list">
+    <div style="padding:12px 16px;border-bottom:1px solid #F1F3F5;">
+      <div style="position:relative;">
+        <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:13px;color:#ADB5BD;">🔍</span>
+        <input type="text" class="form-control" placeholder="Search..." style="padding-left:32px;">
+      </div>
+    </div>
+    ${[
+      {init:'MJL',col:'avatar-red',name:'Mrs. Maydelyn Joy Laudato',role:'Teacher',msg:'Good morning! Kim is doing great.',time:'10:30 AM',unread:1},
+      {init:'AU',col:'avatar-blue',name:'School Administration',role:'Admin',msg:'Parent-Teacher Conference reminder.',time:'Yesterday',unread:0},
+    ].map((m,i)=>`
+    <div class="msg-item ${i===0?'active':''}">
+      <div class="avatar avatar-sm ${m.col}">${m.init}</div>
+      <div class="msg-item-info">
+        <div style="display:flex;justify-content:space-between;">
+          <span class="msg-item-name">${m.name}</span>
+          <span class="msg-item-time">${m.time}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;">
+          <span class="msg-item-preview">${m.msg}</span>
+          ${m.unread?`<span class="msg-unread">${m.unread}</span>`:''}
+        </div>
+      </div>
+    </div>`).join('')}
+  </div>
+
+  <div class="msg-thread">
+    <div class="thread-header">
+      <div class="avatar avatar-sm avatar-red">MJL</div>
+      <div>
+        <div style="font-weight:700;font-size:14px;" id="thread-contact-name">Mrs. Maydelyn Joy Laudato</div>
+        <div style="font-size:12px;color:#ADB5BD;">Teacher — SIA 102, WS 101, CC 106</div>
+      </div>
+    </div>
+    <div class="thread-body" id="thread-body">
+      <div class="bubble sent">
+        <div class="bubble-content">Good morning Ma'am Laudato! I just wanted to ask how Kim is performing in class.</div>
+        <div class="bubble-time">10:28 AM</div>
+      </div>
+      <div class="bubble recv">
+        <div class="bubble-content">Good morning Mrs. Dava! Kim is doing really well — she's at the top of the class with a GWA of 1.25. 🎉 Very impressive student!</div>
+        <div class="bubble-time">10:30 AM</div>
+      </div>
+    </div>
+    <div class="thread-footer">
+      <textarea id="msg-input" placeholder="Type a message... (Enter to send)"></textarea>
+      <button class="btn btn-primary" onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+</div>
+`;
+
+document.body.insertAdjacentHTML('beforeend', `
+<div class="modal-overlay" id="modal-new-msg">
+  <div class="modal">
+    <div class="modal-header"><span class="modal-title">New Message</span><button class="modal-close">✕</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">To</label>
+        <select class="form-control form-select"><option>Mrs. Maydelyn Joy Laudato (Teacher)</option><option>School Administration</option></select></div>
+      <div class="form-group"><label class="form-label">Subject</label><input class="form-control" placeholder="Message subject"></div>
+      <div class="form-group"><label class="form-label">Message</label><textarea class="form-control" rows="5" placeholder="Write your message..."></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-new-msg')">Cancel</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-new-msg');showToast('Message sent!','success')">Send</button>
+    </div>
+  </div>
+</div>
+`);
+</script>
+<script src="app.js"></script>
+</body>
+</html>

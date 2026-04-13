@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>EduTrack — Attendance</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div id="app-root"></div>
+<script src="layout.js"></script>
+<script>
+buildLayout('teacher');
+
+const students = ['Kim Shanelle Dava','John Smith','Alice Wong','Bob Miller','Clara Reyes','David Cruz','Emma Tan','Frank Lee','Grace Park','Henry Tan'];
+const inits = ['KD','JS','AW','BM','CR','DC','ET','FL','GP','HT'];
+const colors = ['avatar-red','avatar-blue','avatar-purple','avatar-teal','avatar-orange','avatar-green','avatar-red','avatar-blue','avatar-purple','avatar-teal'];
+const days = [1,2,3,4,5,8,9,10,11,12,15,16,17,18,19];
+const statuses = ['present','present','present','absent','present','late','present','present','absent','present'];
+
+document.getElementById('page-main').innerHTML = `
+<div class="page-header">
+  <div class="header-left">
+    <h1>📅 Attendance</h1>
+    <p class="subtitle">Track and manage student attendance</p>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-secondary" onclick="showToast('Exporting attendance...','default')">📤 Export</button>
+    <button class="btn btn-primary" onclick="saveAttendance()">💾 Save</button>
+  </div>
+</div>
+
+<div class="stats-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:20px;">
+  <div class="stat-card"><div class="stat-icon green">✅</div><div class="stat-info"><div class="stat-label">Present Today</div><div class="stat-value">28</div></div></div>
+  <div class="stat-card"><div class="stat-icon red">❌</div><div class="stat-info"><div class="stat-label">Absent Today</div><div class="stat-value">3</div></div></div>
+  <div class="stat-card"><div class="stat-icon orange">⚡</div><div class="stat-info"><div class="stat-label">Late Today</div><div class="stat-value">1</div></div></div>
+  <div class="stat-card"><div class="stat-icon blue">📊</div><div class="stat-info"><div class="stat-label">Avg Attendance</div><div class="stat-value">94%</div></div></div>
+</div>
+
+<div class="card" style="margin-bottom:20px;">
+  <div class="card-header">
+    <span class="card-title">Daily Attendance — SIA 102</span>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <input type="month" class="form-control" value="2026-04" style="max-width:160px;" onchange="showToast('Month updated','default')">
+      <select class="form-control form-select" style="max-width:180px;" onchange="showToast('Class changed','default')">
+        <option>SIA 102 – Systems Integration</option>
+        <option>WS 101 – Web Systems</option>
+        <option>CC 106 – App Development</option>
+      </select>
+    </div>
+  </div>
+  <div style="overflow-x:auto;">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="min-width:180px;">Student</th>
+          ${days.map(d=>`<th style="text-align:center;min-width:36px;">${d}</th>`).join('')}
+          <th>Rate</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${students.map((name,si) => {
+          const cells = days.map((_,di) => {
+            const baseStatus = (si + di) % 7 === 0 ? 'absent' : (si + di) % 11 === 0 ? 'late' : 'present';
+            const map = {present:'P',absent:'A',late:'L'};
+            return `<td style="text-align:center;"><div class="attendance-cell ${baseStatus}" data-toggle>${map[baseStatus]}</div></td>`;
+          }).join('');
+          const rate = si < 7 ? Math.floor(88+si*1.5)+'%' : Math.floor(78+si)+'%';
+          const good = parseInt(rate) >= 80;
+          return `<tr>
+            <td><div style="display:flex;align-items:center;gap:8px;"><div class="avatar avatar-sm ${colors[si]}">${inits[si]}</div><span style="font-weight:600;">${name}</span></div></td>
+            ${cells}
+            <td><span class="badge ${good?'badge-success':'badge-danger'}">${rate}</span></td>
+            <td><span class="badge ${good?'badge-success':'badge-warning'}">${good?'GOOD':'AT RISK'}</span></td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer" style="display:flex;gap:16px;font-size:12.5px;">
+    <span style="display:flex;align-items:center;gap:6px;"><span style="background:#E8FAF0;color:#1E8449;padding:2px 8px;border-radius:4px;font-weight:700;">P</span> Present</span>
+    <span style="display:flex;align-items:center;gap:6px;"><span style="background:#FDECEA;color:#C0392B;padding:2px 8px;border-radius:4px;font-weight:700;">A</span> Absent</span>
+    <span style="display:flex;align-items:center;gap:6px;"><span style="background:#FEF9EC;color:#B7770D;padding:2px 8px;border-radius:4px;font-weight:700;">L</span> Late</span>
+    <span style="color:#ADB5BD;">Click a cell to toggle status</span>
+  </div>
+</div>
+`;
+
+function saveAttendance() {
+  showToast('Attendance saved successfully!','success');
+}
+</script>
+<script src="app.js"></script>
+</body>
+</html>

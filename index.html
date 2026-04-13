@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduTrack — Login</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:#F0E8E8;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
+.login-wrap{display:grid;grid-template-columns:1fr 1fr;max-width:900px;width:100%;background:white;border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.12);}
+.login-left{background:linear-gradient(145deg,#8B1A1A 0%,#5C1010 100%);padding:50px 40px;display:flex;flex-direction:column;justify-content:space-between;color:white;}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:40px;}
+.brand-icon{width:42px;height:42px;background:white;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;}
+.brand-name{font-family:'Poppins',sans-serif;font-size:22px;font-weight:700;}
+.login-hero h2{font-family:'Poppins',sans-serif;font-size:28px;font-weight:800;line-height:1.25;margin-bottom:14px;}
+.login-hero p{font-size:14px;opacity:0.8;line-height:1.6;}
+.role-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px;}
+.role-chip{padding:6px 14px;border:1px solid rgba(255,255,255,0.3);border-radius:20px;font-size:12px;font-weight:600;opacity:0.85;}
+.login-right{padding:50px 40px;display:flex;flex-direction:column;justify-content:center;}
+.login-right h3{font-family:'Poppins',sans-serif;font-size:22px;font-weight:700;color:#212529;margin-bottom:6px;}
+.login-right .sub{font-size:13px;color:#6C757D;margin-bottom:30px;}
+.form-group{margin-bottom:18px;}
+.form-label{display:block;font-size:12.5px;font-weight:600;color:#495057;margin-bottom:6px;}
+.form-control{width:100%;padding:11px 14px;border:1px solid #DEE2E6;border-radius:8px;font-size:14px;font-family:inherit;outline:none;transition:all 0.2s;background:white;}
+.form-control:focus{border-color:#8B1A1A;box-shadow:0 0 0 3px rgba(139,26,26,0.08);}
+.form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236C757D' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;}
+.btn-login{width:100%;padding:12px;background:#8B1A1A;color:white;border:none;border-radius:8px;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;transition:all 0.2s;}
+.btn-login:hover{background:#6B1414;transform:translateY(-1px);}
+.forgot{text-align:right;margin-top:8px;font-size:12.5px;color:#8B1A1A;cursor:pointer;text-decoration:none;}
+.forgot:hover{text-decoration:underline;}
+@media(max-width:640px){.login-wrap{grid-template-columns:1fr;}.login-left{padding:30px;}.login-right{padding:30px;}}
+</style>
+</head>
+<body>
+<div class="login-wrap">
+  <div class="login-left">
+    <div>
+      <div class="brand">
+        <div class="brand-icon">🎓</div>
+        <span class="brand-name">EduTrack</span>
+      </div>
+      <div class="login-hero">
+        <h2>Academic Management System</h2>
+        <p>Empowering teachers, students, and parents with real-time academic insights and seamless communication.</p>
+        <div class="role-chips">
+          <span class="role-chip">👩‍🏫 Teacher</span>
+          <span class="role-chip">👨‍💼 Admin</span>
+          <span class="role-chip">👨‍👩‍👧 Parent</span>
+          <span class="role-chip">🎓 Student</span>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:12px;opacity:0.5;">© 2026 EduTrack. All rights reserved.</div>
+  </div>
+  <div class="login-right">
+    <h3>Welcome back 👋</h3>
+    <p class="sub">Sign in to your EduTrack account</p>
+    <div class="form-group">
+      <label class="form-label">Role</label>
+      <select class="form-control form-select" id="role-select">
+        <option value="">Select your role...</option>
+        <option value="student">Student</option>        
+        <option value="teacher">Teacher</option>
+        <option value="admin">Admin</option>
+        <option value="parent">Parent</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Email Address</label>
+      <input type="email" class="form-control" id="email" placeholder="you@school.edu.ph" value="mjlaudato@school.edu.ph">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" placeholder="Enter your password" value="password123">
+    </div>
+    <a class="forgot" href="#">Forgot password?</a>
+    <br><br>
+    <button class="btn-login" onclick="doLogin()">Sign In</button>
+    <p style="text-align:center;font-size:12px;color:#ADB5BD;margin-top:20px;">Demo: Select a role and click Sign In</p>
+  </div>
+</div>
+<script>
+function doLogin() {
+  const role = document.getElementById('role-select').value;
+  const email = document.getElementById('email').value;
+  if (!role) { alert('Please select your role.'); return; }
+  if (!email) { alert('Please enter your email.'); return; }
+  const routes = { student: 'studentdashboard.html', teacher: 'teacherdashboard.html', admin: 'admindashboard.html', parent: 'parentdashboard.html' };
+  window.location.href = routes[role];
+}
+document.getElementById('password').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+</script>
+</body>
+</html>

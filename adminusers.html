@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>EduTrack — User Management</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div id="app-root"></div>
+<script src="layout.js"></script>
+<script>
+buildLayout('admin');
+document.getElementById('page-main').innerHTML = `
+<div class="page-header">
+  <div class="header-left"><h1>👥 User Management</h1><p class="subtitle">Manage all system users</p></div>
+  <div class="header-actions">
+    <button class="btn btn-secondary" onclick="showToast('Exporting users...','default')">📤 Export</button>
+    <button class="btn btn-primary" onclick="openModal('modal-add-user')">+ Add User</button>
+  </div>
+</div>
+
+<div class="stats-grid" style="margin-bottom:20px;">
+  <div class="stat-card"><div class="stat-icon blue">👨‍🎓</div><div class="stat-info"><div class="stat-label">Students</div><div class="stat-value">2,184</div></div></div>
+  <div class="stat-card"><div class="stat-icon green">👩‍🏫</div><div class="stat-info"><div class="stat-label">Teachers</div><div class="stat-value">185</div></div></div>
+  <div class="stat-card"><div class="stat-icon orange">👨‍👩‍👧</div><div class="stat-info"><div class="stat-label">Parents</div><div class="stat-value">1,920</div></div></div>
+  <div class="stat-card"><div class="stat-icon red">🛡️</div><div class="stat-info"><div class="stat-label">Admins</div><div class="stat-value">8</div></div></div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <span class="card-title">All Users</span>
+    <div class="filter-row" style="margin:0;gap:8px;">
+      <div style="position:relative;">
+        <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#ADB5BD;font-size:13px;">🔍</span>
+        <input id="search-users" type="text" class="form-control" placeholder="Search users..." style="padding-left:32px;max-width:220px;">
+      </div>
+      <select class="form-control form-select" style="max-width:130px;" onchange="filterByRole(this.value)">
+        <option value="">All Roles</option>
+        <option value="Student">Student</option>
+        <option value="Teacher">Teacher</option>
+        <option value="Parent">Parent</option>
+        <option value="Admin">Admin</option>
+      </select>
+      <select class="form-control form-select" style="max-width:130px;" onchange="showToast('Filter applied','default')">
+        <option>All Status</option>
+        <option>Active</option>
+        <option>Inactive</option>
+        <option>Suspended</option>
+      </select>
+    </div>
+  </div>
+  <div style="overflow-x:auto;">
+    <table class="data-table" id="users-table">
+      <thead><tr><th>User</th><th>ID</th><th>Role</th><th>Department</th><th>Status</th><th>Last Login</th><th>Actions</th></tr></thead>
+      <tbody>
+        ${[
+          ['Maydelyn Joy Laudato','MJL','avatar-red','TCH-001','Teacher','Information Technology','Active','Today 8:02 AM'],
+          ['Kim Shanelle Dava','KD','avatar-red','STU-001','Student','Information Technology','Active','Today 7:55 AM'],
+          ['Ritchell Dava','RD','avatar-green','PAR-001','Parent','N/A','Active','Today 9:10 AM'],
+          ['John Smith','JS','avatar-blue','STU-002','Student','Information Technology','Active','Yesterday'],
+          ['Alice Wong','AW','avatar-purple','STU-003','Student','Information Technology','Active','Yesterday'],
+          ['Bob Miller','BM','avatar-teal','STU-004','Student','Computer Science','Inactive','1 week ago'],
+          ['Emma Tan','ET','avatar-orange','STU-007','Student','Information Technology','Suspended','2 weeks ago'],
+          ['Admin User','AU','avatar-blue','ADM-001','Admin','IT Systems','Active','Today 10:00 AM'],
+        ].map(([name,init,col,id,role,dept,status,login])=>`
+        <tr>
+          <td><div style="display:flex;align-items:center;gap:10px;"><div class="avatar avatar-sm ${col}">${init}</div><span style="font-weight:600;">${name}</span></div></td>
+          <td style="font-family:monospace;font-size:12px;">${id}</td>
+          <td><span class="badge ${role==='Teacher'?'badge-primary':role==='Admin'?'badge-danger':role==='Parent'?'badge-info':'badge-gray'}">${role}</span></td>
+          <td style="color:#6C757D;">${dept}</td>
+          <td><span class="badge ${status==='Active'?'badge-success':status==='Inactive'?'badge-gray':'badge-danger'}">${status}</span></td>
+          <td style="color:#ADB5BD;font-size:12.5px;">${login}</td>
+          <td>
+            <div style="display:flex;gap:6px;">
+              <button class="btn btn-sm btn-secondary" onclick="editUser('${name}')">✏️</button>
+              <button class="btn btn-sm btn-secondary" onclick="showToast('Resetting password for ${name}','default')">🔑</button>
+              <button class="btn btn-sm btn-danger" onclick="confirmDelete('Deactivate ${name}?',()=>showToast('User deactivated','error'))">🚫</button>
+            </div>
+          </td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer" style="display:flex;justify-content:space-between;align-items:center;">
+    <span style="font-size:13px;color:#6C757D;">Showing 8 of 2,450 users</span>
+    <div style="display:flex;gap:6px;">
+      <button class="btn btn-sm btn-secondary" onclick="showToast('Previous page','default')">← Prev</button>
+      <button class="btn btn-sm btn-primary">1</button>
+      <button class="btn btn-sm btn-secondary" onclick="showToast('Page 2','default')">2</button>
+      <button class="btn btn-sm btn-secondary" onclick="showToast('Page 3','default')">3</button>
+      <button class="btn btn-sm btn-secondary" onclick="showToast('Next page','default')">Next →</button>
+    </div>
+  </div>
+</div>
+`;
+
+function editUser(name) {
+  document.getElementById('edit-user-name').value = name;
+  openModal('modal-edit-user');
+}
+
+function filterByRole(role) {
+  document.querySelectorAll('#users-table tbody tr').forEach(row => {
+    if (!role) { row.style.display = ''; return; }
+    row.style.display = row.textContent.includes(role) ? '' : 'none';
+  });
+}
+
+document.body.insertAdjacentHTML('beforeend', `
+<div class="modal-overlay" id="modal-add-user">
+  <div class="modal">
+    <div class="modal-header"><span class="modal-title">Add New User</span><button class="modal-close">✕</button></div>
+    <div class="modal-body">
+      <div class="two-col-equal">
+        <div class="form-group"><label class="form-label">First Name</label><input class="form-control" placeholder="First name"></div>
+        <div class="form-group"><label class="form-label">Last Name</label><input class="form-control" placeholder="Last name"></div>
+      </div>
+      <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-control" placeholder="email@school.edu.ph"></div>
+      <div class="form-group"><label class="form-label">Role</label>
+        <select class="form-control form-select"><option>Student</option><option>Teacher</option><option>Parent</option><option>Admin</option></select></div>
+      <div class="form-group"><label class="form-label">Department</label>
+        <select class="form-control form-select"><option>Information Technology</option><option>Computer Science</option><option>Business Administration</option></select></div>
+      <div class="form-group"><label class="form-label">Temporary Password</label><input type="password" class="form-control" value="Temp@123" placeholder="Set password"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-add-user')">Cancel</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-add-user');showToast('User created and credentials sent via email!','success')">Create User</button>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-edit-user">
+  <div class="modal">
+    <div class="modal-header"><span class="modal-title">Edit User</span><button class="modal-close">✕</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Full Name</label><input class="form-control" id="edit-user-name"></div>
+      <div class="form-group"><label class="form-label">Status</label>
+        <select class="form-control form-select"><option>Active</option><option>Inactive</option><option>Suspended</option></select></div>
+      <div class="form-group"><label class="form-label">Role</label>
+        <select class="form-control form-select"><option>Student</option><option>Teacher</option><option>Parent</option><option>Admin</option></select></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-edit-user')">Cancel</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-edit-user');showToast('User updated!','success')">Save</button>
+    </div>
+  </div>
+</div>
+`);
+</script>
+<script src="app.js"></script>
+</body>
+</html>

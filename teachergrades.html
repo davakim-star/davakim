@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>EduTrack — Grades</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div id="app-root"></div>
+<script src="layout.js"></script>
+<script>
+buildLayout('teacher');
+document.getElementById('page-main').innerHTML = `
+<div class="page-header">
+  <div class="header-left">
+    <h1>📊 Grades</h1>
+    <p class="subtitle">Manage and track student performance</p>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-secondary" onclick="showToast('Exporting grades...','default')">📤 Export</button>
+    <button class="btn btn-primary" onclick="openModal('modal-grade')">+ Add Grade</button>
+  </div>
+</div>
+
+<div class="tabs" data-tabs>
+  <button class="tab active" data-tab="sia">SIA 102</button>
+  <button class="tab" data-tab="ws">WS 101</button>
+  <button class="tab" data-tab="cc">CC 106</button>
+</div>
+
+<div class="tab-panel active" data-panel="sia">
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">SIA 102 — Systems Integration</span>
+      <div class="filter-row" style="margin:0;gap:8px;">
+        <div class="search-input" style="position:relative;">
+          <span class="si" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#ADB5BD;">🔍</span>
+          <input id="search-grades" type="text" class="form-control" placeholder="Search student..." style="padding-left:32px;max-width:200px;">
+        </div>
+        <select class="form-control form-select" style="max-width:150px;" onchange="showToast('Filter applied','default')">
+          <option>All Types</option>
+          <option>Quiz</option>
+          <option>Midterm</option>
+          <option>Finals</option>
+          <option>Project</option>
+        </select>
+      </div>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="data-table" id="grades-table">
+        <thead>
+          <tr>
+            <th>Student</th>
+            <th>Quiz 1</th>
+            <th>Quiz 2</th>
+            <th>Midterm</th>
+            <th>Finals</th>
+            <th>Project</th>
+            <th>Final Grade</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${[
+            ['Kim Shanelle Dava','KD','avatar-red',92,95,90,94,96,'1.25','PASSED'],
+            ['John Smith','JS','avatar-blue',78,82,76,80,85,'2.00','PASSED'],
+            ['Alice Wong','AW','avatar-purple',88,91,87,89,92,'1.50','PASSED'],
+            ['Bob Miller','BM','avatar-teal',70,72,68,74,75,'2.50','PASSED'],
+            ['Clara Reyes','CR','avatar-orange',95,97,94,96,98,'1.00','PASSED'],
+            ['David Cruz','DC','avatar-green',60,55,58,62,65,'3.00','PASSED'],
+            ['Emma Tan','ET','avatar-red',45,50,48,52,55,'5.00','FAILED'],
+          ].map(([name,init,col,q1,q2,mid,fin,proj,grade,status]) => `
+          <tr>
+            <td><div style="display:flex;align-items:center;gap:10px;"><div class="avatar avatar-sm ${col}">${init}</div><span style="font-weight:600;">${name}</span></div></td>
+            <td>${q1}</td><td>${q2}</td><td>${mid}</td><td>${fin}</td><td>${proj}</td>
+            <td><span class="grade-chip">${grade}</span></td>
+            <td><span class="badge ${status==='PASSED'?'badge-success':'badge-danger'}">${status}</span></td>
+            <td>
+              <button class="btn btn-sm btn-secondary" onclick="editGrade('${name}')">✏️ Edit</button>
+            </td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="tab-panel" data-panel="ws">
+  <div class="card">
+    <div class="card-header"><span class="card-title">WS 101 — Web Systems</span></div>
+    <div style="overflow-x:auto;">
+      <table class="data-table">
+        <thead><tr><th>Student</th><th>Quiz 1</th><th>Quiz 2</th><th>Midterm</th><th>Finals</th><th>Project</th><th>Final Grade</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody>
+          ${[
+            ['Kim Shanelle Dava','KD','avatar-red',88,86,87,89,90,'1.50','PASSED'],
+            ['John Smith','JS','avatar-blue',75,77,74,78,80,'2.25','PASSED'],
+            ['Alice Wong','AW','avatar-purple',82,84,80,85,88,'1.75','PASSED'],
+          ].map(([name,init,col,q1,q2,mid,fin,proj,grade,status]) => `
+          <tr>
+            <td><div style="display:flex;align-items:center;gap:10px;"><div class="avatar avatar-sm ${col}">${init}</div><span style="font-weight:600;">${name}</span></div></td>
+            <td>${q1}</td><td>${q2}</td><td>${mid}</td><td>${fin}</td><td>${proj}</td>
+            <td><span class="grade-chip">${grade}</span></td>
+            <td><span class="badge badge-success">${status}</span></td>
+            <td><button class="btn btn-sm btn-secondary" onclick="editGrade('${name}')">✏️ Edit</button></td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="tab-panel" data-panel="cc">
+  <div class="card">
+    <div class="card-header"><span class="card-title">CC 106 — App Development</span></div>
+    <div style="overflow-x:auto;">
+      <table class="data-table">
+        <thead><tr><th>Student</th><th>Quiz 1</th><th>Quiz 2</th><th>Midterm</th><th>Finals</th><th>Project</th><th>Final Grade</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody>
+          ${[
+            ['Kim Shanelle Dava','KD','avatar-red',85,87,84,88,92,'1.75','PASSED'],
+            ['John Smith','JS','avatar-blue',72,70,68,74,76,'2.50','PASSED'],
+          ].map(([name,init,col,q1,q2,mid,fin,proj,grade,status]) => `
+          <tr>
+            <td><div style="display:flex;align-items:center;gap:10px;"><div class="avatar avatar-sm ${col}">${init}</div><span style="font-weight:600;">${name}</span></div></td>
+            <td>${q1}</td><td>${q2}</td><td>${mid}</td><td>${fin}</td><td>${proj}</td>
+            <td><span class="grade-chip">${grade}</span></td>
+            <td><span class="badge badge-success">${status}</span></td>
+            <td><button class="btn btn-sm btn-secondary" onclick="editGrade('${name}')">✏️ Edit</button></td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+`;
+
+function editGrade(name) {
+  document.getElementById('edit-student-name').textContent = name;
+  openModal('modal-edit-grade');
+}
+
+document.body.insertAdjacentHTML('beforeend', `
+<div class="modal-overlay" id="modal-grade">
+  <div class="modal">
+    <div class="modal-header"><span class="modal-title">Add Grade</span><button class="modal-close">✕</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Subject</label>
+        <select class="form-control form-select"><option>SIA 102</option><option>WS 101</option><option>CC 106</option></select></div>
+      <div class="form-group"><label class="form-label">Student</label>
+        <select class="form-control form-select"><option>Kim Shanelle Dava</option><option>John Smith</option><option>Alice Wong</option></select></div>
+      <div class="form-group"><label class="form-label">Assessment</label>
+        <select class="form-control form-select"><option>Quiz 1</option><option>Quiz 2</option><option>Midterm</option><option>Finals</option><option>Project</option></select></div>
+      <div class="form-group"><label class="form-label">Score</label><input type="number" class="form-control" placeholder="0-100"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-grade')">Cancel</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-grade');showToast('Grade added!','success')">Save Grade</button>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-edit-grade">
+  <div class="modal">
+    <div class="modal-header"><span class="modal-title">Edit Grade — <span id="edit-student-name"></span></span><button class="modal-close">✕</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Assessment</label>
+        <select class="form-control form-select"><option>Quiz 1</option><option>Quiz 2</option><option>Midterm</option><option>Finals</option><option>Project</option></select></div>
+      <div class="form-group"><label class="form-label">New Score</label><input type="number" class="form-control" placeholder="0-100"></div>
+      <div class="form-group"><label class="form-label">Remarks</label><textarea class="form-control"></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-edit-grade')">Cancel</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-edit-grade');showToast('Grade updated!','success')">Update</button>
+    </div>
+  </div>
+</div>
+`);
+</script>
+<script src="app.js"></script>
+</body>
+</html>
